@@ -778,6 +778,17 @@ section {
     .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-image {
+        order: -1;
+        margin-bottom: 2rem;
+    }
+
+    .hero-content {
+        order: 1;
     }
 
     .hero-title {
@@ -796,13 +807,10 @@ section {
         justify-content: center;
     }
 
-    .hero-image {
-        margin-top: 2rem;
-    }
-
     .floating-card {
         width: 200px;
         height: 200px;
+        margin: 0 auto;
     }
 
     .section-title {
