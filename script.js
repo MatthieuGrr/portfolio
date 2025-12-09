@@ -246,7 +246,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observer les cartes de projet, compétences, etc.
 document.addEventListener('DOMContentLoaded', () => {
     const animatedElements = document.querySelectorAll(
-        '.project-card, .skill-category, .contact-item, .highlight-item'
+        '.project-card, .tech-group, .contact-item, .highlight-item'
     );
 
     animatedElements.forEach(el => {
