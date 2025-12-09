@@ -261,7 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initialisation
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
+    // Ne charger les projets que si la grille existe (page index)
+    if (document.getElementById('projects-grid')) {
+        loadProjects();
+    }
 });
 
 // ==========================================
