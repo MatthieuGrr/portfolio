@@ -301,243 +301,323 @@
 
         <!-- Introduction -->
         <section class="project-section">
-            <h2><i class="fas fa-trophy"></i> Vue d'ensemble</h2>
+            <h2><i class="fas fa-trophy"></i> Le défi</h2>
             <p>
-                <strong>Victoire au premier Makeathon ARES organisé par l'Agence européenne de défense (EDA) à Cracovie.</strong>
-                Notre équipe French Touch a remporté la première place avec Marianne, un robot UGV (Unmanned Ground Vehicle)
-                de 48kg conçu pour des missions logistiques, de reconnaissance et NBC (Nucléaire, Biologique, Chimique).
+                Le Makeathon ARES 2025, organisé par l'Agence européenne de défense (EDA) à Cracovie, réunissait
+                les meilleures équipes européennes autour d'un défi ambitieux : concevoir, fabriquer et programmer
+                un robot UGV (Unmanned Ground Vehicle) autonome en quelques jours.
             </p>
             <p>
-                Le défi consistait à concevoir, fabriquer et programmer un robot autonome capable d'accomplir trois missions
-                complexes dans un temps limité : logistique automatisée, reconnaissance terrain, et détection NBC.
+                Le robot devait accomplir trois missions complexes en conditions réelles sur terrain accidenté.
+                L'équipe French Touch a relevé ce défi avec Marianne, un robot de 48kg remportant la première place.
             </p>
 
-            <div class="highlight-box">
-                <h4><i class="fas fa-medal"></i> Résultats de la compétition</h4>
-                <ul>
-                    <li>🥇 <strong>1ère place</strong> sur toutes les équipes participantes</li>
-                    <li>✅ Tous les checkpoints validés pour la Task 1 (Logistique)</li>
-                    <li>🎯 Mode téléopéré privilégié en raison du terrain difficile</li>
-                    <li>🤖 Architecture robotique complète et fonctionnelle</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Technical Specs -->
-        <section class="project-section">
-            <h2><i class="fas fa-cogs"></i> Spécifications techniques</h2>
-
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-weight"></i></div>
-                    <div class="label">Poids total</div>
-                    <div class="value">48 kg</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-microchip"></i></div>
-                    <div class="label">Contrôleur principal</div>
-                    <div class="value">LattePanda</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-bolt"></i></div>
-                    <div class="label">Moteurs</div>
-                    <div class="value">4x 1000W</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-network-wired"></i></div>
-                    <div class="label">Bus de communication</div>
-                    <div class="value">CAN Bus</div>
-                </div>
-            </div>
-
-            <h3>Stack technologique</h3>
-            <div class="tech-stack">
-                <span class="tech-tag"><i class="fas fa-microchip"></i> ESP32</span>
-                <span class="tech-tag"><i class="fas fa-robot"></i> ROS2</span>
-                <span class="tech-tag"><i class="fas fa-network-wired"></i> CAN Bus</span>
-                <span class="tech-tag"><i class="fas fa-microchip"></i> PCB Design (KiCad)</span>
-                <span class="tech-tag"><i class="fas fa-broadcast-tower"></i> ELRS</span>
-                <span class="tech-tag"><i class="fas fa-brain"></i> Jetson Nano</span>
-                <span class="tech-tag"><i class="fas fa-camera"></i> ZED 2i</span>
-                <span class="tech-tag"><i class="fas fa-satellite"></i> GNSS RTK</span>
-                <span class="tech-tag"><i class="fas fa-server"></i> LattePanda</span>
-                <span class="tech-tag"><i class="fas fa-robot"></i> Piper AgileX</span>
-            </div>
-        </section>
-
-        <!-- Architecture -->
-        <section class="project-section">
-            <h2><i class="fas fa-project-diagram"></i> Architecture du système</h2>
-
             <div class="architecture-box">
-                <h4><i class="fas fa-network-wired"></i> Architecture CAN Bus</h4>
-                <p>Le robot utilise une architecture distribuée basée sur le protocole CAN Bus pour assurer une communication
-                fiable et temps réel entre tous les sous-systèmes :</p>
+                <h4>Les trois missions du défi</h4>
                 <ul>
-                    <li><strong>Nœud Loader</strong> : PCB custom ESP32 pour le système de chargement automatique</li>
-                    <li><strong>Nœud Task 3</strong> : Capteurs pour la mission de détection NBC</li>
-                    <li><strong>Nœud Distance</strong> : Capteurs de distance pour l'évitement d'obstacles</li>
-                    <li><strong>Nœud Moteurs</strong> : Contrôleur des 4 moteurs brushless 1000W</li>
-                    <li><strong>Bus CAN séparé</strong> : Bras robotique Piper AgileX</li>
-                </ul>
-            </div>
-
-            <h3>Composants principaux</h3>
-
-            <div class="architecture-box">
-                <h4>💻 LattePanda - Cerveau central</h4>
-                <ul>
-                    <li>Exécution de ROS2 (Robot Operating System 2)</li>
-                    <li>Communication CAN via dongle USB</li>
-                    <li>Orchestration de tous les sous-systèmes</li>
-                    <li>Connexion Ethernet avec Jetson Nano pour la vision</li>
-                </ul>
-            </div>
-
-            <div class="architecture-box">
-                <h4>🤖 Système de locomotion</h4>
-                <ul>
-                    <li>Configuration différentielle (differential drive)</li>
-                    <li>4 moteurs brushless de 1000W avec capteurs Hall</li>
-                    <li>Contrôleur custom avec double mode :
-                        <ul style="margin-top: 0.5rem;">
-                            <li>Mode manuel via récepteur ELRS (ExpressLRS)</li>
-                            <li>Mode autonome via ROS2</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="architecture-box">
-                <h4>👁️ Système de vision et localisation</h4>
-                <ul>
-                    <li><strong>Caméra ZED 2i</strong> : Vision stéréo 3D pour la perception de l'environnement</li>
-                    <li><strong>Jetson Nano</strong> : Traitement IA en temps réel des données de vision</li>
-                    <li><strong>IMU Ellipse-D (SBG)</strong> : Navigation inertielle avec GNSS RTK haute précision</li>
-                    <li>Communication Ethernet entre Jetson et LattePanda</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Personal Contributions -->
-        <section class="project-section">
-            <h2><i class="fas fa-user-cog"></i> Mes contributions</h2>
-
-            <div class="highlight-box">
-                <h4><i class="fas fa-drafting-compass"></i> 1. Conception CAO complète</h4>
-                <p>Réalisation de toute la conception assistée par ordinateur du robot, incluant la structure mécanique,
-                l'intégration des composants et l'optimisation de la distribution de masse.</p>
-            </div>
-
-            <div class="highlight-box">
-                <h4><i class="fas fa-microchip"></i> 2. Système de chargement automatique (Loader)</h4>
-                <p><strong>Conception d'un PCB custom complet pour gérer 4 tiroirs motorisés :</strong></p>
-                <ul>
-                    <li><strong>Microcontrôleur</strong> : ESP32 (cœur du système)</li>
-                    <li><strong>Drivers moteurs</strong> : DRV8825 pour piloter les moteurs pas-à-pas NEMA17</li>
-                    <li><strong>Capteurs</strong> : Limit switches pour détecter les positions des tiroirs</li>
-                    <li><strong>Communication</strong> : Transceiver CAN TJA1050 pour l'intégration au bus principal</li>
-                    <li><strong>Conception</strong> : Design du PCB avec KiCad</li>
-                    <li><strong>Fonctionnalité</strong> : Distribution automatique de 4 caisses pour la mission logistique</li>
+                    <li><strong>Task 1 - Logistique automatisée</strong> : Transporter et distribuer automatiquement 4 caisses depuis un point de chargement vers 4 points de livraison différents. Nécessite navigation précise, système de chargement/déchargement automatique et robustesse mécanique.</li>
+                    <li><strong>Task 2 - Reconnaissance terrain</strong> : Explorer une zone inconnue, créer une cartographie en temps réel et identifier des points d'intérêt. Requiert vision par ordinateur, SLAM (Simultaneous Localization and Mapping) et navigation autonome.</li>
+                    <li><strong>Task 3 - Détection NBC</strong> : Localiser et identifier des sources de contamination Nucléaire, Biologique ou Chimique à l'aide de capteurs spécialisés. Demande intégration de capteurs sensibles et traitement de données en temps réel.</li>
                 </ul>
             </div>
 
             <div class="highlight-box">
-                <h4><i class="fas fa-robot"></i> 3. Plugin ROS2 pour l'intégration CAN</h4>
-                <p>Développement d'un plugin ROS2 custom permettant la communication bidirectionnelle entre :</p>
+                <h4><i class="fas fa-medal"></i> Résultats</h4>
                 <ul>
-                    <li>Le système ROS2 tournant sur LattePanda</li>
-                    <li>Tous les nœuds ESP32 sur le bus CAN</li>
-                    <li>Traduction des messages CAN en topics/services ROS2</li>
-                    <li>Gestion des commandes de déploiement des tiroirs</li>
-                </ul>
-            </div>
-
-            <div class="highlight-box">
-                <h4><i class="fas fa-hand-paper"></i> 4. Automatisation du bras robotique</h4>
-                <p>Programmation et intégration du bras Piper AgileX pour la manipulation automatique des objets
-                lors des missions de logistique et de reconnaissance.</p>
-            </div>
-        </section>
-
-        <!-- Missions & Results -->
-        <section class="project-section">
-            <h2><i class="fas fa-tasks"></i> Missions accomplies</h2>
-
-            <h3>Task 1 : Logistique automatisée ✅</h3>
-            <div class="architecture-box">
-                <p><strong>Objectif</strong> : Transporter et distribuer des caisses d'un point A à un point B</p>
-                <ul>
+                    <li>🥇 1ère place toutes catégories</li>
                     <li>✅ Tous les checkpoints validés</li>
-                    <li>🎮 Mode téléopéré privilégié (terrain très accidenté rendant l'autonomie difficile)</li>
-                    <li>📦 Système de 4 tiroirs automatiques fonctionnel</li>
-                    <li>🤖 Déploiement automatique des caisses via le loader custom</li>
+                    <li>🎯 Stratégie adaptative : mode téléopéré privilégié face au terrain difficile</li>
+                    <li>⚡ Système entièrement fonctionnel et robuste</li>
                 </ul>
             </div>
+        </section>
 
-            <h3>Architecture temps réel</h3>
+        <!-- Technical Challenges -->
+        <section class="project-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Défis techniques</h2>
+
             <div class="architecture-box">
-                <p>Pour gérer la complexité du système, nous avons mis en place une architecture distribuée efficace :</p>
+                <h4>Défis relevés durant le Makeathon</h4>
                 <ul>
-                    <li><strong>Communication CAN Bus</strong> : Latence faible, fiabilité élevée</li>
-                    <li><strong>ROS2</strong> : Orchestration des différents modules logiciels</li>
-                    <li><strong>Double mode de contrôle</strong> :
+                    <li><strong>Contrainte de temps</strong> : Conception, fabrication PCB, assemblage et test en 2 mois</li>
+                    <li><strong>Intégration multi-systèmes</strong> : Faire communiquer ROS2, CAN Bus, vision IA et contrôle moteurs</li>
+                    <li><strong>Débogage terrain</strong> : Adaptation rapide aux conditions réelles (terrain, interférences)</li>
+                    <li><strong>Gestion de l'énergie</strong> : Alimenter 4x1000W + électronique embarquée avec autonomie suffisante</li>
+                    <li><strong>Fiabilité mécanique</strong> : Le système de loader devait fonctionner parfaitement à chaque fois</li>
+                    <li><strong>Coordination d'équipe</strong> : Travail simultané sur mécanique, électronique et software</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Table -->
+        <section class="project-section">
+            <h2><i class="fas fa-cogs"></i> Caractéristiques techniques</h2>
+
+            <div class="architecture-box">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="border-bottom: 2px solid var(--border-color);">
+                        <th style="text-align: left; padding: 1rem; font-weight: 700; color: var(--primary-color);">Catégorie</th>
+                        <th style="text-align: left; padding: 1rem; font-weight: 700; color: var(--primary-color);">Spécification</th>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Dimensions (L×l×h)</td>
+                        <td style="padding: 0.75rem;">80 × 90 × 45 cm</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Masse totale</td>
+                        <td style="padding: 0.75rem;">48 kg</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Propulsion</td>
+                        <td style="padding: 0.75rem;">4× moteurs brushless 1000W (différentiel)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Ordinateur principal</td>
+                        <td style="padding: 0.75rem;">LattePanda + ROS2</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Vision embarquée</td>
+                        <td style="padding: 0.75rem;">ZED 2i (stéréo) + Jetson Nano</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Localisation</td>
+                        <td style="padding: 0.75rem;">IMU Ellipse-D (SBG) + GNSS RTK</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Communication</td>
+                        <td style="padding: 0.75rem;">Bus CAN (TJA1050) + ELRS (téléopération)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--border-color);">
+                        <td style="padding: 0.75rem; font-weight: 600;">Microcontrôleurs</td>
+                        <td style="padding: 0.75rem;">ESP32 (multiples nœuds CAN)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; font-weight: 600;">Manipulateur</td>
+                        <td style="padding: 0.75rem;">Bras Piper AgileX (CAN dédié)</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Software Tools -->
+        <section class="project-section">
+            <h2><i class="fas fa-laptop-code"></i> Logiciels & outils</h2>
+
+            <div class="specs-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+                <div class="spec-card" style="padding: 2rem 1rem;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: #e3f2fd; border-radius: 8px; padding: 0.5rem;">
+                        <img src="images/logos/onshape-logo.svg" alt="Onshape" style="max-width: 120px; max-height: 60px;">
+                    </div>
+                    <div class="value" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Onshape</div>
+                    <div class="label" style="font-size: 0.9rem;">CAO 3D / Conception mécanique</div>
+                </div>
+                <div class="spec-card" style="padding: 2rem 1rem;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: #e3f2fd; border-radius: 8px; padding: 0.5rem;">
+                        <img src="images/logos/kicad-logo.png" alt="KiCad" style="max-width: 120px; max-height: 60px;">
+                    </div>
+                    <div class="value" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">KiCad</div>
+                    <div class="label" style="font-size: 0.9rem;">Conception PCB / Schématique</div>
+                </div>
+                <div class="spec-card" style="padding: 2rem 1rem;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: #e3f2fd; border-radius: 8px; padding: 0.5rem;">
+                        <img src="images/logos/esp-idf-logo.svg" alt="ESP-IDF" style="max-width: 120px; max-height: 60px;">
+                    </div>
+                    <div class="value" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">ESP-IDF</div>
+                    <div class="label" style="font-size: 0.9rem;">Framework ESP32 / Embedded C++</div>
+                </div>
+                <div class="spec-card" style="padding: 2rem 1rem;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: #e3f2fd; border-radius: 8px; padding: 0.5rem;">
+                        <img src="images/logos/ros2-logo.png" alt="ROS2" style="max-width: 120px; max-height: 60px;">
+                    </div>
+                    <div class="value" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">ROS2</div>
+                    <div class="label" style="font-size: 0.9rem;">Middleware robotique / Python & C++</div>
+                </div>
+                <div class="spec-card" style="padding: 2rem 1rem;">
+                    <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; background: #e3f2fd; border-radius: 8px; padding: 0.5rem;">
+                        <img src="images/logos/yolo-logo.svg" alt="YOLO Ultralytics" style="max-width: 120px; max-height: 60px;">
+                    </div>
+                    <div class="value" style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">YOLO</div>
+                    <div class="label" style="font-size: 0.9rem;">Computer Vision / Détection objets</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mechanical Design -->
+        <section class="project-section">
+            <h2><i class="fas fa-drafting-compass"></i> Conception mécanique</h2>
+
+            <p>
+                L'ensemble du robot a été conçu en CAO (Conception Assistée par Ordinateur) pour optimiser
+                l'intégration des composants, la distribution de masse et l'accessibilité pour la maintenance.
+            </p>
+
+            <div class="architecture-box">
+                <h4>Points clés de la conception</h4>
+                <ul>
+                    <li><strong>Structure modulaire</strong> : Facilite l'assemblage et les modifications rapides</li>
+                    <li><strong>Optimisation de masse</strong> : 48kg répartis de manière équilibrée sur les 4 roues</li>
+                    <li><strong>Protection des composants</strong> : Boîtiers étanches pour l'électronique sensible</li>
+                    <li><strong>Accessibilité</strong> : Compartiments facilement ouverts pour debug et réparations</li>
+                    <li><strong>Système de loader amovible</strong> : 4 tiroirs motorisés pour la distribution automatique</li>
+                    <li><strong>Capteurs NRBC optionnels en façade</strong> : Facilité d'ajout de capteurs grâce au CAN</li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- Electronic Architecture -->
+        <section class="project-section">
+            <h2><i class="fas fa-microchip"></i> Architecture électronique</h2>
+
+            <h3>PCB custom pour le système de chargement</h3>
+            <div class="architecture-box">
+                <p>
+                    Un PCB dédié a été conçu sur KiCad pour gérer le système de loader automatique à 4 tiroirs.
+                    Ce système constitue le cœur de la mission logistique, permettant la distribution automatique
+                    des caisses aux points de livraison.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Composants du PCB Loader</h4>
+                <ul>
+                    <li><strong>Microcontrôleur ESP32</strong> : Cœur du système, gestion de la logique et communication</li>
+                    <li><strong>2x DRV8825</strong> : Drivers pour moteurs pas-à-pas avec microstepping</li>
+                    <li><strong>2x NEMA17</strong> : Moteurs pas-à-pas pour déploiement précis des tiroirs</li>
+                    <li><strong>Limit switches</strong> : Détection des positions initiale et finale de chaque tiroir</li>
+                    <li><strong>Transceiver CAN TJA1050</strong> : Interface vers le bus CAN principal</li>
+                    <li><strong>Régulation de puissance</strong> : Alimentation stabilisée pour l'ESP32 et drivers</li>
+                    <li><strong>Protection</strong> : Circuits de protection contre les courts-circuits et surtensions</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Fonctionnement</h4>
+                <p>
+                    Chaque tiroir peut être déployé indépendamment via des commandes CAN. L'ESP32 reçoit les ordres
+                    depuis le système ROS2, contrôle les moteurs via les DRV8825,  vérifie les positions avec les
+                    limit switches et remonte son état pour garantir un déploiement fiable et reproductible.
+                </p>
+            </div>
+
+            <h3>Architecture CAN Bus distribuée</h3>
+            <div class="architecture-box">
+                <p>
+                    Le robot utilise une architecture distribuée basée sur le protocole CAN Bus, offrant robustesse,
+                    latence faible et fiabilité même en environnement perturbé.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Nœuds sur le bus principal</h4>
+                <ul>
+                    <li><strong>Nœud Loader (ESP32)</strong> : Contrôle du système de chargement 4 tiroirs</li>
+                    <li><strong>Nœud Task 3 (ESP32)</strong> : Gestion des capteurs NBC</li>
+                    <li><strong>Nœud Distance (ESP32)</strong> : Capteurs ultrasoniques pour évitement d'obstacles</li>
+                    <li><strong>Nœud Moteurs</strong> : Contrôleur des 4 moteurs brushless 1000W</li>
+                    <li><strong>LattePanda (via dongle CAN)</strong> : Ordinateur central exécutant ROS2</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Bus CAN secondaire</h4>
+                <ul>
+                    <li><strong>Bras Piper AgileX</strong> : Sur son propre bus pour isolation et performance</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Software Architecture -->
+        <section class="project-section">
+            <h2><i class="fas fa-code"></i> Architecture logicielle</h2>
+
+            <h3>Système ROS2 sur LattePanda</h3>
+            <div class="architecture-box">
+                <p>
+                    L'orchestration globale du robot repose sur ROS2 (Robot Operating System 2), framework
+                    standard en robotique professionnelle, tournant sur un LattePanda.
+                </p>
+            </div>
+
+            <h3>Plugin ROS2 pour intégration CAN</h3>
+            <div class="architecture-box">
+                <p>
+                    Un plugin ROS2 custom a été développé pour faire le pont entre le système ROS2 et tous les
+                    nœuds ESP32 du bus CAN. Ce plugin est essentiel au fonctionnement du robot.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Fonctionnalités du plugin</h4>
+                <ul>
+                    <li><strong>Traduction CAN ↔ ROS2</strong> : Convertit les trames CAN en topics/services ROS2</li>
+                    <li><strong>Communication bidirectionnelle</strong> : Envoi de commandes et réception de telemetry</li>
+                    <li><strong>Gestion des priorités</strong> : Priorisation des messages critiques (arrêt d'urgence)</li>
+                    <li><strong>Diagnostic</strong> : Monitoring de l'état de chaque nœud CAN</li>
+                    <li><strong>Interface standardisée</strong> : API ROS2 classique pour les autres modules</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Exemple d'utilisation</h4>
+                <p>
+                    Pour déployer le tiroir n°2, un nœud ROS2 publie sur le topic <code>/loader/deploy</code>.
+                    Le plugin traduit cette commande en trame CAN vers l'ESP32 du loader, qui exécute l'action
+                    et renvoie le statut via CAN, retraduit en topic ROS2 <code>/loader/status</code>.
+                </p>
+            </div>
+
+            <h3>Système de locomotion</h3>
+            <div class="architecture-box">
+                <h4>Configuration différentielle</h4>
+                <ul>
+                    <li>4 moteurs brushless de 1000W avec capteurs Hall pour l'odométrie</li>
+                    <li>Contrôleur custom avec double mode de fonctionnement :
                         <ul style="margin-top: 0.5rem;">
-                            <li>Manuel via ELRS pour le pilotage de précision</li>
-                            <li>Autonome via ROS2 pour les séquences automatisées</li>
+                            <li><strong>Mode manuel</strong> : Pilotage direct via récepteur ELRS (ExpressLRS)</li>
+                            <li><strong>Mode autonome</strong> : Commandes depuis ROS2 via CAN Bus</li>
                         </ul>
                     </li>
+                    <li>Transition fluide entre les modes pour adaptation au terrain</li>
                 </ul>
             </div>
         </section>
 
-        <!-- Challenges -->
+        <!-- Vision & Localization -->
         <section class="project-section">
-            <h2><i class="fas fa-exclamation-triangle"></i> Défis techniques relevés</h2>
-            <ul>
-                <li><strong>Terrain difficile</strong> : Adaptation de la stratégie de navigation pour privilégier le mode téléopéré</li>
-                <li><strong>Intégration CAN Bus</strong> : Mise en place d'une architecture distribuée robuste avec plusieurs nœuds ESP32</li>
-                <li><strong>Synchronisation ROS2-CAN</strong> : Développement d'un plugin custom pour la traduction des protocoles</li>
-                <li><strong>Conception mécanique</strong> : Optimisation du poids (48kg) tout en intégrant tous les systèmes</li>
-                <li><strong>Gestion de l'énergie</strong> : Alimentation de 4 moteurs de 1000W + toute l'électronique embarquée</li>
-                <li><strong>Temps limité</strong> : Conception, fabrication et test en quelques jours lors du Makeathon</li>
-            </ul>
-        </section>
+            <h2><i class="fas fa-eye"></i> Vision et localisation</h2>
 
-        <!-- Learnings -->
-        <section class="project-section">
-            <h2><i class="fas fa-graduation-cap"></i> Compétences développées</h2>
-            <div class="specs-grid">
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-microchip"></i></div>
-                    <div class="label">Embedded Systems</div>
-                    <div class="value">ESP32, PCB</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-robot"></i></div>
-                    <div class="label">Robotique</div>
-                    <div class="value">ROS2, CAN</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-drafting-compass"></i></div>
-                    <div class="label">CAO/Mécanique</div>
-                    <div class="value">Design 3D</div>
-                </div>
-                <div class="spec-card">
-                    <div class="icon"><i class="fas fa-users"></i></div>
-                    <div class="label">Travail d'équipe</div>
-                    <div class="value">Makeathon</div>
-                </div>
+            <div class="architecture-box">
+                <h4><i class="fas fa-camera"></i> Système de vision embarqué</h4>
+                <ul>
+                    <li><strong>Caméra ZED 2i</strong> : Vision stéréo pour perception 3D de l'environnement</li>
+                    <li><strong>Jetson Nano</strong> : Traitement IA temps réel (détection d'obstacles, reconnaissance)</li>
+                    <li><strong>Liaison Ethernet</strong> : Communication haute vitesse entre Jetson et LattePanda</li>
+                </ul>
+            </div>
+
+            <div class="architecture-box">
+                <h4><i class="fas fa-satellite"></i> Navigation et positionnement</h4>
+                <ul>
+                    <li><strong>IMU Ellipse-D (SBG)</strong> : Centrale inertielle de grade industriel</li>
+                    <li><strong>GNSS RTK</strong> : Positionnement centimétrique pour navigation de précision</li>
+                    <li><strong>Fusion de données</strong> : Combinaison IMU + GNSS + odométrie moteurs</li>
+                </ul>
             </div>
         </section>
+
+        <!-- Robotic Arm -->
+        <section class="project-section">
+            <h2><i class="fas fa-hand-paper"></i> Bras robotique Piper AgileX</h2>
+
+            <div class="architecture-box">
+                <p>
+                    Le bras Piper AgileX est intégré au robot pour la manipulation d'objets lors des missions
+                    de logistique et de reconnaissance.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Intégration et contrôle</h4>
+                <ul>
+                    <li><strong>Bus CAN dédié</strong> : Isolation du bras sur son propre réseau CAN</li>
+                    <li><strong>Séquences automatisées</strong> : Programmation de mouvements répétitifs (prise/dépose)</li>
+                    <li><strong>Mode manuel</strong> : Contrôle direct via un jumeau échelle 1/2 pour situations imprévues</li>
+                </ul>
+            </div>
+        </section>
+
 
         <!-- Links -->
         <section class="project-section">
-            <h2><i class="fas fa-link"></i> Liens et ressources</h2>
+            <h2><i class="fas fa-link"></i> Ressources</h2>
             <div class="project-links">
-                <a href="https://github.com/KevinBdn/Makeathon-FR" class="project-btn" target="_blank">
-                    <i class="fab fa-github"></i> Voir le code sur GitHub
-                </a>
                 <a href="https://www.linkedin.com/feed/update/urn:li:activity:7330958733066280960/" class="project-btn" target="_blank">
                     <i class="fab fa-linkedin"></i> Article LinkedIn
                 </a>
@@ -553,17 +633,22 @@
             <div class="image-gallery">
                 <div class="image-placeholder">
                     <i class="fas fa-robot" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-color);"></i>
-                    <p>Photos à venir</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Images depuis Google Drive</p>
+                    <p>Robot Marianne</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Vue d'ensemble du UGV</p>
                 </div>
                 <div class="image-placeholder">
                     <i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
                     <p>PCB Loader</p>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary);">ESP32 + DRV8825</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">ESP32 + DRV8825 + CAN</p>
                 </div>
                 <div class="image-placeholder">
-                    <i class="fas fa-trophy" style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color);"></i>
-                    <p>Remise des prix</p>
+                    <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color);"></i>
+                    <p>Système 4 tiroirs</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Distribution automatique</p>
+                </div>
+                <div class="image-placeholder">
+                    <i class="fas fa-trophy" style="font-size: 3rem; margin-bottom: 1rem; color: #FFD700;"></i>
+                    <p>Victoire</p>
                     <p style="font-size: 0.9rem; color: var(--text-secondary);">1ère place - Cracovie</p>
                 </div>
             </div>
