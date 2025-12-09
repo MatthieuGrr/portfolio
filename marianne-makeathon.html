@@ -307,8 +307,17 @@
         }
 
         @media (max-width: 768px) {
+            .project-hero {
+                background-attachment: scroll;
+                padding: 6rem 1rem 3rem;
+            }
+
             .project-hero h1 {
                 font-size: 1.8rem;
+            }
+
+            .project-hero .trophy {
+                font-size: 3rem;
             }
 
             .project-meta {
@@ -316,8 +325,24 @@
                 gap: 1rem;
             }
 
+            .project-section {
+                margin-bottom: 2rem;
+            }
+
             .project-section h2 {
                 font-size: 1.5rem;
+            }
+
+            .project-content {
+                padding: 2rem 1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 250px;
             }
         }
     </style>

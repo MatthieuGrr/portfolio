@@ -797,7 +797,12 @@ section {
     }
 
     .hero-image {
-        display: none;
+        margin-top: 2rem;
+    }
+
+    .floating-card {
+        width: 200px;
+        height: 200px;
     }
 
     .section-title {
