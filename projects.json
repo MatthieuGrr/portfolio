@@ -1,0 +1,65 @@
+[
+    {
+        "title": "Marianne - 1ère place ARES Makeathon 2025 (EDA)",
+        "category": "robotique",
+        "date": "Mai 2025",
+        "description": "🏆 Victoire au premier Makeathon ARES organisé par l'Agence européenne de défense à Cracovie. Robot UGV de 48kg pour missions logistiques, reconnaissance et NBC. Architecture complète : PCB custom ESP32 + bus CAN, plugin ROS2, système de chargement automatique à 4 tiroirs, bras Piper AgileX, vision IA (ZED 2i + Jetson), GNSS RTK, 4 moteurs brushless 1000W. Équipe French Touch.",
+        "technologies": ["ESP32", "ROS2", "CAN Bus", "PCB Design", "ELRS", "Jetson Nano", "GNSS RTK", "KiCad"],
+        "image": "",
+        "link": "marianne-makeathon.html"
+    },
+    {
+        "title": "Robot autonome avec ESP32",
+        "category": "robotique",
+        "date": "Décembre 2024",
+        "description": "Robot mobile autonome équipé de capteurs ultrasoniques et d'une caméra, capable de naviguer et d'éviter les obstacles. Contrôlé par un ESP32 avec communication WiFi.",
+        "technologies": ["ESP32", "C++", "PlatformIO", "Capteurs US", "Moteurs DC"],
+        "image": "",
+        "link": ""
+    },
+    {
+        "title": "Station météo IoT",
+        "category": "electronique",
+        "date": "Novembre 2024",
+        "description": "Station météorologique connectée mesurant température, humidité, pression atmosphérique et qualité de l'air. Données envoyées vers un serveur MQTT et visualisées sur dashboard web.",
+        "technologies": ["ESP8266", "BME280", "MQTT", "Node-RED", "InfluxDB"],
+        "image": "",
+        "link": ""
+    },
+    {
+        "title": "Contrôleur domotique personnalisé",
+        "category": "iot",
+        "date": "Octobre 2024",
+        "description": "Système domotique DIY pour contrôler l'éclairage, les volets et le chauffage. Interface web responsive et intégration avec assistants vocaux.",
+        "technologies": ["Raspberry Pi", "Python", "Flask", "Home Assistant", "MQTT"],
+        "image": "",
+        "link": ""
+    },
+    {
+        "title": "Bibliothèque de drivers pour écrans OLED",
+        "category": "programmation",
+        "date": "Septembre 2024",
+        "description": "Bibliothèque C++ optimisée pour piloter différents types d'écrans OLED (SSD1306, SH1106) avec support de polices personnalisées et graphiques vectoriels.",
+        "technologies": ["C++", "I2C", "SPI", "Git", "Documentation"],
+        "image": "",
+        "link": ""
+    },
+    {
+        "title": "PCB pour alimentation régulée",
+        "category": "electronique",
+        "date": "Août 2024",
+        "description": "Conception d'un PCB pour alimentation régulée multi-tensions (3.3V, 5V, 12V) avec protection contre les courts-circuits et surtensions. Design compact avec dissipation thermique optimisée.",
+        "technologies": ["KiCad", "LM2596", "Protection", "PCB Design"],
+        "image": "",
+        "link": ""
+    },
+    {
+        "title": "Bras robotique à 4 axes",
+        "category": "robotique",
+        "date": "Juillet 2024",
+        "description": "Bras robotique imprimé en 3D avec 4 degrés de liberté, contrôlé par des servomoteurs. Interface de commande avec cinématique inverse et enregistrement de séquences.",
+        "technologies": ["Arduino", "Servomoteurs", "Cinématique", "Python", "PySerial"],
+        "image": "",
+        "link": ""
+    }
+]

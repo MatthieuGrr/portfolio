@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marianne - Robot UGV vainqueur du Makeathon ARES 2025 (EDA) à Cracovie">
+    <title>Marianne - 1ère place ARES Makeathon 2025 | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .project-hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+        }
+
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-hero .trophy {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .project-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-section h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary-color);
+        }
+
+        .project-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .project-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-section ul li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .project-section ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .architecture-box {
+            background: var(--card-background);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border: 2px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-btn.secondary {
+            background: var(--card-background);
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: gap 0.3s ease;
+        }
+
+        .back-link:hover {
+            gap: 1rem;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .image-placeholder {
+            background: var(--card-background);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 3rem 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .spec-card .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .project-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-microchip"></i>
+                <span>Portfolio</span>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="index.html#apropos" class="nav-link">À propos</a></li>
+                <li><a href="index.html#projets" class="nav-link">Projets</a></li>
+                <li><a href="index.html#competences" class="nav-link">Compétences</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="trophy">🏆</div>
+        <h1>Marianne - Robot UGV Vainqueur</h1>
+        <p style="font-size: 1.3rem; margin-top: 1rem;">1ère place au Makeathon ARES 2025 (EDA)</p>
+        <div class="project-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Mai 2025</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Cracovie, Pologne</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-users"></i>
+                <span>Équipe French Touch</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <a href="index.html#projets" class="back-link">
+            <i class="fas fa-arrow-left"></i> Retour aux projets
+        </a>
+
+        <!-- Introduction -->
+        <section class="project-section">
+            <h2><i class="fas fa-trophy"></i> Vue d'ensemble</h2>
+            <p>
+                <strong>Victoire au premier Makeathon ARES organisé par l'Agence européenne de défense (EDA) à Cracovie.</strong>
+                Notre équipe French Touch a remporté la première place avec Marianne, un robot UGV (Unmanned Ground Vehicle)
+                de 48kg conçu pour des missions logistiques, de reconnaissance et NBC (Nucléaire, Biologique, Chimique).
+            </p>
+            <p>
+                Le défi consistait à concevoir, fabriquer et programmer un robot autonome capable d'accomplir trois missions
+                complexes dans un temps limité : logistique automatisée, reconnaissance terrain, et détection NBC.
+            </p>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-medal"></i> Résultats de la compétition</h4>
+                <ul>
+                    <li>🥇 <strong>1ère place</strong> sur toutes les équipes participantes</li>
+                    <li>✅ Tous les checkpoints validés pour la Task 1 (Logistique)</li>
+                    <li>🎯 Mode téléopéré privilégié en raison du terrain difficile</li>
+                    <li>🤖 Architecture robotique complète et fonctionnelle</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Technical Specs -->
+        <section class="project-section">
+            <h2><i class="fas fa-cogs"></i> Spécifications techniques</h2>
+
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-weight"></i></div>
+                    <div class="label">Poids total</div>
+                    <div class="value">48 kg</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <div class="label">Contrôleur principal</div>
+                    <div class="value">LattePanda</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <div class="label">Moteurs</div>
+                    <div class="value">4x 1000W</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="label">Bus de communication</div>
+                    <div class="value">CAN Bus</div>
+                </div>
+            </div>
+
+            <h3>Stack technologique</h3>
+            <div class="tech-stack">
+                <span class="tech-tag"><i class="fas fa-microchip"></i> ESP32</span>
+                <span class="tech-tag"><i class="fas fa-robot"></i> ROS2</span>
+                <span class="tech-tag"><i class="fas fa-network-wired"></i> CAN Bus</span>
+                <span class="tech-tag"><i class="fas fa-microchip"></i> PCB Design (KiCad)</span>
+                <span class="tech-tag"><i class="fas fa-broadcast-tower"></i> ELRS</span>
+                <span class="tech-tag"><i class="fas fa-brain"></i> Jetson Nano</span>
+                <span class="tech-tag"><i class="fas fa-camera"></i> ZED 2i</span>
+                <span class="tech-tag"><i class="fas fa-satellite"></i> GNSS RTK</span>
+                <span class="tech-tag"><i class="fas fa-server"></i> LattePanda</span>
+                <span class="tech-tag"><i class="fas fa-robot"></i> Piper AgileX</span>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section class="project-section">
+            <h2><i class="fas fa-project-diagram"></i> Architecture du système</h2>
+
+            <div class="architecture-box">
+                <h4><i class="fas fa-network-wired"></i> Architecture CAN Bus</h4>
+                <p>Le robot utilise une architecture distribuée basée sur le protocole CAN Bus pour assurer une communication
+                fiable et temps réel entre tous les sous-systèmes :</p>
+                <ul>
+                    <li><strong>Nœud Loader</strong> : PCB custom ESP32 pour le système de chargement automatique</li>
+                    <li><strong>Nœud Task 3</strong> : Capteurs pour la mission de détection NBC</li>
+                    <li><strong>Nœud Distance</strong> : Capteurs de distance pour l'évitement d'obstacles</li>
+                    <li><strong>Nœud Moteurs</strong> : Contrôleur des 4 moteurs brushless 1000W</li>
+                    <li><strong>Bus CAN séparé</strong> : Bras robotique Piper AgileX</li>
+                </ul>
+            </div>
+
+            <h3>Composants principaux</h3>
+
+            <div class="architecture-box">
+                <h4>💻 LattePanda - Cerveau central</h4>
+                <ul>
+                    <li>Exécution de ROS2 (Robot Operating System 2)</li>
+                    <li>Communication CAN via dongle USB</li>
+                    <li>Orchestration de tous les sous-systèmes</li>
+                    <li>Connexion Ethernet avec Jetson Nano pour la vision</li>
+                </ul>
+            </div>
+
+            <div class="architecture-box">
+                <h4>🤖 Système de locomotion</h4>
+                <ul>
+                    <li>Configuration différentielle (differential drive)</li>
+                    <li>4 moteurs brushless de 1000W avec capteurs Hall</li>
+                    <li>Contrôleur custom avec double mode :
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Mode manuel via récepteur ELRS (ExpressLRS)</li>
+                            <li>Mode autonome via ROS2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="architecture-box">
+                <h4>👁️ Système de vision et localisation</h4>
+                <ul>
+                    <li><strong>Caméra ZED 2i</strong> : Vision stéréo 3D pour la perception de l'environnement</li>
+                    <li><strong>Jetson Nano</strong> : Traitement IA en temps réel des données de vision</li>
+                    <li><strong>IMU Ellipse-D (SBG)</strong> : Navigation inertielle avec GNSS RTK haute précision</li>
+                    <li>Communication Ethernet entre Jetson et LattePanda</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Personal Contributions -->
+        <section class="project-section">
+            <h2><i class="fas fa-user-cog"></i> Mes contributions</h2>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-drafting-compass"></i> 1. Conception CAO complète</h4>
+                <p>Réalisation de toute la conception assistée par ordinateur du robot, incluant la structure mécanique,
+                l'intégration des composants et l'optimisation de la distribution de masse.</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-microchip"></i> 2. Système de chargement automatique (Loader)</h4>
+                <p><strong>Conception d'un PCB custom complet pour gérer 4 tiroirs motorisés :</strong></p>
+                <ul>
+                    <li><strong>Microcontrôleur</strong> : ESP32 (cœur du système)</li>
+                    <li><strong>Drivers moteurs</strong> : DRV8825 pour piloter les moteurs pas-à-pas NEMA17</li>
+                    <li><strong>Capteurs</strong> : Limit switches pour détecter les positions des tiroirs</li>
+                    <li><strong>Communication</strong> : Transceiver CAN TJA1050 pour l'intégration au bus principal</li>
+                    <li><strong>Conception</strong> : Design du PCB avec KiCad</li>
+                    <li><strong>Fonctionnalité</strong> : Distribution automatique de 4 caisses pour la mission logistique</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-robot"></i> 3. Plugin ROS2 pour l'intégration CAN</h4>
+                <p>Développement d'un plugin ROS2 custom permettant la communication bidirectionnelle entre :</p>
+                <ul>
+                    <li>Le système ROS2 tournant sur LattePanda</li>
+                    <li>Tous les nœuds ESP32 sur le bus CAN</li>
+                    <li>Traduction des messages CAN en topics/services ROS2</li>
+                    <li>Gestion des commandes de déploiement des tiroirs</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-hand-paper"></i> 4. Automatisation du bras robotique</h4>
+                <p>Programmation et intégration du bras Piper AgileX pour la manipulation automatique des objets
+                lors des missions de logistique et de reconnaissance.</p>
+            </div>
+        </section>
+
+        <!-- Missions & Results -->
+        <section class="project-section">
+            <h2><i class="fas fa-tasks"></i> Missions accomplies</h2>
+
+            <h3>Task 1 : Logistique automatisée ✅</h3>
+            <div class="architecture-box">
+                <p><strong>Objectif</strong> : Transporter et distribuer des caisses d'un point A à un point B</p>
+                <ul>
+                    <li>✅ Tous les checkpoints validés</li>
+                    <li>🎮 Mode téléopéré privilégié (terrain très accidenté rendant l'autonomie difficile)</li>
+                    <li>📦 Système de 4 tiroirs automatiques fonctionnel</li>
+                    <li>🤖 Déploiement automatique des caisses via le loader custom</li>
+                </ul>
+            </div>
+
+            <h3>Architecture temps réel</h3>
+            <div class="architecture-box">
+                <p>Pour gérer la complexité du système, nous avons mis en place une architecture distribuée efficace :</p>
+                <ul>
+                    <li><strong>Communication CAN Bus</strong> : Latence faible, fiabilité élevée</li>
+                    <li><strong>ROS2</strong> : Orchestration des différents modules logiciels</li>
+                    <li><strong>Double mode de contrôle</strong> :
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Manuel via ELRS pour le pilotage de précision</li>
+                            <li>Autonome via ROS2 pour les séquences automatisées</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Challenges -->
+        <section class="project-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Défis techniques relevés</h2>
+            <ul>
+                <li><strong>Terrain difficile</strong> : Adaptation de la stratégie de navigation pour privilégier le mode téléopéré</li>
+                <li><strong>Intégration CAN Bus</strong> : Mise en place d'une architecture distribuée robuste avec plusieurs nœuds ESP32</li>
+                <li><strong>Synchronisation ROS2-CAN</strong> : Développement d'un plugin custom pour la traduction des protocoles</li>
+                <li><strong>Conception mécanique</strong> : Optimisation du poids (48kg) tout en intégrant tous les systèmes</li>
+                <li><strong>Gestion de l'énergie</strong> : Alimentation de 4 moteurs de 1000W + toute l'électronique embarquée</li>
+                <li><strong>Temps limité</strong> : Conception, fabrication et test en quelques jours lors du Makeathon</li>
+            </ul>
+        </section>
+
+        <!-- Learnings -->
+        <section class="project-section">
+            <h2><i class="fas fa-graduation-cap"></i> Compétences développées</h2>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <div class="label">Embedded Systems</div>
+                    <div class="value">ESP32, PCB</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-robot"></i></div>
+                    <div class="label">Robotique</div>
+                    <div class="value">ROS2, CAN</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                    <div class="label">CAO/Mécanique</div>
+                    <div class="value">Design 3D</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <div class="label">Travail d'équipe</div>
+                    <div class="value">Makeathon</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="project-section">
+            <h2><i class="fas fa-link"></i> Liens et ressources</h2>
+            <div class="project-links">
+                <a href="https://github.com/KevinBdn/Makeathon-FR" class="project-btn" target="_blank">
+                    <i class="fab fa-github"></i> Voir le code sur GitHub
+                </a>
+                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7330958733066280960/" class="project-btn" target="_blank">
+                    <i class="fab fa-linkedin"></i> Article LinkedIn
+                </a>
+                <a href="index.html#projets" class="project-btn secondary">
+                    <i class="fas fa-arrow-left"></i> Retour aux projets
+                </a>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Placeholder -->
+        <section class="project-section">
+            <h2><i class="fas fa-images"></i> Galerie photo</h2>
+            <div class="image-gallery">
+                <div class="image-placeholder">
+                    <i class="fas fa-robot" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-color);"></i>
+                    <p>Photos à venir</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">Images depuis Google Drive</p>
+                </div>
+                <div class="image-placeholder">
+                    <i class="fas fa-microchip" style="font-size: 3rem; margin-bottom: 1rem; color: var(--secondary-color);"></i>
+                    <p>PCB Loader</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">ESP32 + DRV8825</p>
+                </div>
+                <div class="image-placeholder">
+                    <i class="fas fa-trophy" style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent-color);"></i>
+                    <p>Remise des prix</p>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary);">1ère place - Cracovie</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Portfolio Électronique & Robotique. Hébergé sur <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
