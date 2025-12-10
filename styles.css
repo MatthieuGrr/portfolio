@@ -599,6 +599,18 @@ section {
     justify-content: center;
     color: white;
     font-size: 4rem;
+    position: relative;
+}
+
+.project-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+    pointer-events: none;
 }
 
 .project-content {
@@ -697,10 +709,10 @@ section {
     padding: 2rem;
     box-shadow: var(--shadow);
     transition: var(--transition);
+    overflow: hidden;
 }
 
 .tech-group:hover {
-    transform: translateY(-5px);
     box-shadow: var(--shadow-lg);
 }
 
@@ -741,7 +753,7 @@ section {
 .tech-item:hover {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
-    transform: translateX(5px);
+    transform: scale(1.05);
 }
 
 .tech-item i {
