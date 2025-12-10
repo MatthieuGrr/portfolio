@@ -756,16 +756,11 @@ section {
     border-radius: 8px;
     transition: var(--transition);
     cursor: default;
-    min-width: 0;
-    overflow: hidden;
 }
 
 .tech-item span {
     font-weight: 500;
     font-size: 0.9rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .tech-item:hover {
