@@ -851,6 +851,28 @@ section {
    Responsive
    ========================================== */
 @media (max-width: 768px) {
+    .navbar {
+        background-color: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-bottom: none;
+    }
+
+    body.dark-mode .navbar {
+        background-color: transparent;
+        border-bottom: none;
+    }
+
+    .navbar.scrolled {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
+    body.dark-mode .navbar.scrolled {
+        background-color: transparent;
+        box-shadow: none;
+    }
+
     .nav-menu {
         position: fixed;
         top: var(--nav-height);
