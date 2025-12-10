@@ -189,6 +189,7 @@ body.dark-mode .nav-link:hover {
     gap: 0.5rem;
     position: absolute;
     right: 2rem;
+    transition: var(--transition);
 }
 
 .theme-toggle {
@@ -911,6 +912,16 @@ section {
 
     .nav-icons {
         right: 1rem;
+        background-color: var(--card-bg);
+        padding: 0.5rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+    }
+
+    body.dark-mode .nav-icons {
+        background-color: var(--card-bg);
+        box-shadow: var(--shadow-lg);
     }
 
     .hero-container {
