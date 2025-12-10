@@ -608,9 +608,10 @@ section {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 60px;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
     pointer-events: none;
+    z-index: 1;
 }
 
 .project-content {
@@ -748,6 +749,16 @@ section {
     border-radius: 8px;
     transition: var(--transition);
     cursor: default;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.tech-item span {
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .tech-item:hover {
@@ -767,11 +778,6 @@ section {
 .tech-item:hover i {
     color: white;
     transform: scale(1.1);
-}
-
-.tech-item span {
-    font-weight: 500;
-    font-size: 0.9rem;
 }
 
 /* ==========================================
