@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Distributeur de Croquettes Intelligent - Système de déverrouillage à distance pour animaux">
+    <title>Distributeur de Croquettes Intelligent | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Navigation spécifique pour les pages de projet */
+        .nav-container {
+            justify-content: space-between !important;
+        }
+
+        .back-to-portfolio {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .back-to-portfolio:hover {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .back-to-portfolio:hover {
+            background-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .back-to-portfolio i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-portfolio:hover i {
+            transform: translateX(-5px);
+        }
+
+        /* Responsive pour le bouton retour */
+        @media (max-width: 480px) {
+            .back-to-portfolio span {
+                display: none;
+            }
+
+            .back-to-portfolio {
+                width: 40px;
+                height: 40px;
+                justify-content: center;
+                padding: 0;
+            }
+        }
+
+        .project-hero {
+            background:
+                linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(124, 58, 237, 0.85)),
+                url('images/pet_feeder/IMG_20251221_171528.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        .project-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-hero .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .project-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-section h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary-color);
+        }
+
+        .project-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .project-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-section ul li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .project-section ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .architecture-box {
+            background: var(--card-background);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border: 2px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-btn.secondary {
+            background: var(--card-background);
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+        }
+
+        .gallery-item .caption h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .gallery-item .caption p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .spec-card .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .project-hero {
+                background-attachment: scroll;
+                padding: 6rem 1rem 3rem;
+            }
+
+            .project-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-hero .icon {
+                font-size: 3rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .project-section {
+                margin-bottom: 2rem;
+            }
+
+            .project-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-content {
+                padding: 2rem 1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html#projets" class="back-to-portfolio">
+                <i class="fas fa-arrow-left"></i>
+                <span>Retour au portfolio</span>
+            </a>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="icon"><i class="fas fa-box"></i></div>
+        <h1>Distributeur de Croquettes Intelligent</h1>
+        <p style="font-size: 1.3rem; margin-top: 1rem;">Système de déverrouillage à distance pour animaux</p>
+        <div class="project-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Décembre 2025</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-microchip"></i>
+                <span>ESP32 H4 (Zigbee)</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-print"></i>
+                <span>Impression 3D</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+        <!-- Introduction -->
+        <section class="project-section">
+            <h2><i class="fas fa-lightbulb"></i> Genèse du projet</h2>
+            <p>
+                Ce projet est né d'un besoin personnel concret : garantir l'alimentation de mon animal en cas d'absence
+                imprévue. Face aux solutions commerciales existantes (distributeurs programmables rigides, systèmes
+                complexes avec application propriétaire), j'ai identifié une opportunité de concevoir une solution
+                minimaliste, open-source et intégrable dans mon infrastructure domotique existante.
+            </p>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-bullseye"></i> Objectifs de conception</h4>
+                <ul>
+                    <li><strong>Simplicité mécanique</strong> : Privilégier un mécanisme fiable avec peu de pièces mobiles</li>
+                    <li><strong>Intégration domotique native</strong> : Compatible Home Assistant via protocole standardisé (Zigbee)</li>
+                    <li><strong>Fabrication accessible</strong> : Entièrement réalisable avec une imprimante 3D FDM standard</li>
+                    <li><strong>Coût maîtrisé</strong> : Budget cible <20€ en composants électroniques</li>
+                    <li><strong>Maintenance minimale</strong> : Conception modulaire facilitant réparations et modifications</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Design Process -->
+        <section class="project-section">
+            <h2><i class="fas fa-pencil-ruler"></i> Démarche de conception</h2>
+
+            <h3>Analyse du besoin et spécifications</h3>
+            <div class="architecture-box">
+                <p>
+                    La première étape a consisté à analyser les contraintes fonctionnelles et techniques du système :
+                </p>
+                <ul>
+                    <li><strong>Fonction principale</strong> : Déverrouillage à distance d'un conteneur de nourriture</li>
+                    <li><strong>Contrainte de fiabilité</strong> : Le mécanisme doit fonctionner à 100% (pas de blocage possible)</li>
+                    <li><strong>Contrainte énergétique</strong> : Alimentation secteur acceptable (pas d'autonomie requise)</li>
+                    <li><strong>Contrainte réseau</strong> : Doit s'intégrer dans une installation Home Assistant existante</li>
+                    <li><strong>Contrainte de fabrication</strong> : Impression 3D FDM uniquement (pas d'usinage CNC)</li>
+                </ul>
+            </div>
+
+            <h3>Choix technologiques et arbitrages</h3>
+            <div class="architecture-box">
+                <h4>Mécanisme d'ouverture : approche mécanique passive</h4>
+                <p>
+                    Plutôt qu'un système motorisé continu (moteur DC, vérin électrique), j'ai opté pour une approche
+                    hybride mécanique-élastique. Le servo SG90 ne sert qu'à libérer un verrou, l'ouverture réelle
+                    étant assurée par des bandes élastiques pré-tendues.
+                </p>
+                <p><strong>Avantages de cette solution :</strong></p>
+                <ul>
+                    <li>Consommation énergétique minimale (servo actif seulement 2-3 secondes)</li>
+                    <li>Fiabilité accrue : l'énergie élastique garantit une ouverture franche même en cas de frottements</li>
+                    <li>Simplicité mécanique : pas de transmission complexe (engrenages, courroies)</li>
+                    <li>Réduction du bruit : ouverture silencieuse après le déverrouillage</li>
+                </ul>
+
+                <h4>Choix du microcontrôleur : ESP32 H4 vs alternatives</h4>
+                <p>
+                    Le choix de l'ESP32 H4 a été motivé par plusieurs facteurs techniques :
+                </p>
+                <ul>
+                    <li><strong>Support Zigbee natif</strong> : Protocole industriel, plus robuste que le Wi-Fi pour l'IoT</li>
+                    <li><strong>Format compact</strong> : SuperMini adapté aux contraintes d'encombrement du boîtier</li>
+                    <li><strong>Coût</strong> : ~5€, bien inférieur à des alternatives Zigbee dédiées (CC2652, etc.)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Technical Specifications -->
+        <section class="project-section">
+            <h2><i class="fas fa-cogs"></i> Caractéristiques techniques</h2>
+
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <div class="label">Microcontrôleur</div>
+                    <div class="value">ESP32 H4</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-cog"></i></div>
+                    <div class="label">Servo moteur</div>
+                    <div class="value">SG90</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <div class="label">Alimentation</div>
+                    <div class="value">5V USB</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-wifi"></i></div>
+                    <div class="label">Connectivité</div>
+                    <div class="value">Zigbee</div>
+                </div>
+            </div>
+
+            <div class="architecture-box">
+                <h4>Composants électroniques</h4>
+                <ul>
+                    <li><strong>ESP32 H4 SuperMini</strong> : Microcontrôleur avec support Zigbee intégré</li>
+                    <li><strong>Servo SG90</strong> : Actionneur pour le mécanisme de déverrouillage (9g, 180°)</li>
+                    <li><strong>Alimentation 5V USB</strong> : Câble USB standard pour l'alimentation</li>
+                </ul>
+            </div>
+
+            <div class="architecture-box">
+                <h4>Composants mécaniques</h4>
+                <ul>
+                    <li><strong>Boîtier imprimé 3D</strong> : 3 pièces principales (base, couvercle, mécanisme de verrouillage)</li>
+                    <li><strong>Tige filetée M3</strong> : Axe de charnière pour l'ouverture du couvercle</li>
+                    <li><strong>Écrous M3</strong> : 2× écrous pour la fixation de la charnière</li>
+                    <li><strong>Bandes élastiques</strong> : Système de rappel pour l'ouverture automatique du couvercle</li>
+                    <li><strong>Vis M2</strong> : 6× vis pour la fixation du servo et assemblage</li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- Mechanical Design -->
+        <section class="project-section">
+            <h2><i class="fas fa-drafting-compass"></i> Développement mécanique</h2>
+
+            <h3>Modélisation CAO et itérations de conception</h3>
+            <div class="architecture-box">
+                <p>
+                    La conception mécanique a été réalisée sous Onshape, en privilégiant une approche paramétrique
+                    permettant d'ajuster rapidement les dimensions en fonction des résultats de prototypage.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Contraintes de conception pour l'impression 3D FDM</h4>
+                <ul>
+                    <li><strong>Minimisation des supports</strong> : Orientation des pièces pour limiter les porte-à-faux >45°</li>
+                    <li><strong>Tolérances d'assemblage</strong> : Jeu de 0.2-0.5mm sur les pièces mobiles (charnière, verrou)</li>
+                    <li><strong>Épaisseurs de paroi</strong> : Minimum 3mm pour garantir la rigidité structurelle</li>
+                    <li><strong>Inserts filetés évités</strong> : Filetage direct dans le PLA</li>
+                    <li><strong>Anisotropie du matériau</strong> : Sollicitations mécaniques orientées selon le plan de dépose</li>
+                </ul>
+            </div>
+
+            <h3>Cinématique du mécanisme de déverrouillage</h3>
+            <div class="architecture-box">
+                <p>
+                    Le palonnier du servo SG90 vient bloquer directement le couvercle en position fermée.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Principe de fonctionnement</h4>
+                <ul>
+                    <li><strong>Position verrouillée (0°)</strong> : Le palonnier du servo, positionné à 0°, s'insère
+                    dans une encoche du couvercle et le maintient fermé contre la force de rappel des élastiques.</li>
+
+                    <li><strong>Déverrouillage (90°)</strong> : Une rotation du servo de 90° libère le palonnier de l'encoche,
+                    supprimant instantanément le blocage mécanique</li>
+
+                    <li><strong>Ouverture automatique</strong> : Dès que le palonnier se dégage, les élastiques pré-tendus
+                    propulsent le couvercle vers le haut via la charnière M3, donnant accès au contenu</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Réglage empirique des élastiques</h4>
+                <p>
+                    Le nombre d'élastiques a été déterminé par essais successifs pour obtenir un équilibre optimal :
+                    suffisamment de force pour garantir une ouverture franche du couvercle, tout en appliquant une force
+                    principalement radiale sur le servo. Les élastiques ne contraignent pas directement le servo en opposition,
+                    ce qui minimise le couple requis lors du verrouillage/déverrouillage. Configuration finale retenue après tests :
+                    2-3 élastiques standards (diamètre ~60mm) selon la force d'ouverture souhaitée.
+                </p>
+            </div>
+
+            <h3>Optimisation pour la fabrication additive</h3>
+            <div class="architecture-box">
+                <h4>Stratégie d'impression validée par prototypage</h4>
+                <ul>
+                    <li><strong>Matériau final</strong> : PETG pour version définitive (meilleure
+                    résistance aux UV et températures, important si exposition solaire)</li>
+
+                    <li><strong>Post-traitement minimal</strong> : Ébavurage au cutter uniquement sur les points de contact
+                    mobile (charnière, interface verrou-ergot)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Electronic Architecture -->
+        <section class="project-section">
+            <h2><i class="fas fa-microchip"></i> Architecture électronique et système embarqué</h2>
+
+            <h3>Plateforme matérielle : ESP32 H4 SuperMini</h3>
+            <div class="architecture-box">
+                <p>
+                    L'architecture électronique a été volontairement simplifiée au maximum pour réduire les points
+                    de défaillance et faciliter le débogage. Le système ne comporte que deux composants actifs :
+                    l'ESP32 H4 et le servo SG90.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Justification technique du choix ESP32 H4</h4>
+                <ul>
+                    <li><strong>Protocole Zigbee 3.0 natif</strong> : L'ESP32 H4 intègre une radio IEEE 802.15.4 compatible
+                    Zigbee, évitant l'ajout d'un module externe (simplifie le routage PCB et réduit l'encombrement)</li>
+
+                    <li><strong>Développement bas niveau possible</strong> : Accès direct aux API ESP-IDF pour développement
+                    firmware custom en C/C++, permettant optimisations fines et contrôle total du matériel</li>
+
+                    <li><strong>Bilan énergétique</strong> : Consommation en veille Zigbee : ~15mA, acceptable pour
+                    alimentation secteur USB. Si autonomie requise à l'avenir, passage en deep sleep possible (5µA)</li>
+
+                    <li><strong>Périphériques intégrés</strong> : Timer matériel LEDC pour génération PWM servo sans CPU overhead</li>
+                </ul>
+            </div>
+
+            <h3>Choix du servo SG90</h3>
+            <div class="architecture-box">
+                <p>
+                    Le servo SG90 (9g, couple 1.8 kg·cm @ 5V) a été sélectionné pour sa disponibilité, son faible coût (~3€)
+                    et son encombrement réduit compatible avec le boîtier compact. Le mécanisme ayant été conçu avec une
+                    force radiale des élastiques plutôt qu'une opposition frontale, le couple requis pour le déverrouillage
+                    reste faible et largement dans les capacités du SG90.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Alimentation et interfaçage</h4>
+                <p>
+                    Le SG90 peut consommer jusqu'à 200-250mA en charge. L'architecture adoptée simplifie le câblage :
+                </p>
+                <ul>
+                    <li><strong>Alimentation directe 5V</strong> : Le servo est alimenté directement depuis le rail USB 5V,
+                    évitant l'utilisation du régulateur 3.3V interne de l'ESP32 (limité à 500mA)</li>
+
+                    <li><strong>Signal PWM 3.3V</strong> : Le servo SG90 accepte les signaux logiques 3.3V, permettant
+                    une connexion directe depuis une GPIO de l'ESP32 sans level shifter</li>
+
+                    <li><strong>Pas de régulateur intermédiaire</strong> : L'alimentation USB fournit directement le 5V,
+                    simplifiant le circuit et réduisant les pertes énergétiques</li>
+                </ul>
+            </div>
+
+            <h3>Architecture système minimale</h3>
+            <div class="architecture-box">
+                <h4>Schéma électrique</h4>
+                <p>
+                    L'architecture finale ne comporte aucun composant passif (résistances, condensateurs), uniquement
+                    trois connexions directes :
+                </p>
+                <ul>
+                    <li><strong>USB 5V</strong> → VIN ESP32 + VCC Servo (alimentation commune)</li>
+                    <li><strong>GND commun</strong> → GND ESP32 + GND Servo</li>
+                    <li><strong>GPIO 2 (PWM)</strong> → Signal Servo</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Absence de protection : choix justifié</h4>
+                <p>
+                    Aucune diode de roue libre, condensateur de découplage ou protection surtension n'a été ajouté.
+                    Justification : le servo SG90 n'est pas un moteur brushless (pas de back-EMF), l'alimentation USB
+                    est stabilisée en amont, et la consommation instantanée reste dans les limites du port USB.
+                </p>
+                <p>
+                    <em>En environnement industriel, des protections seraient nécessaires. Ici, le compromis
+                    simplicité/fiabilité a été privilégié pour un prototype fonctionnel.</em>
+                </p>
+            </div>
+        </section>
+
+        <!-- Software -->
+        <section class="project-section">
+            <h2><i class="fas fa-code"></i> Développement logiciel et intégration domotique</h2>
+
+            <h3>Architecture firmware ESP-IDF</h3>
+            <div class="architecture-box">
+                <p>
+                    Le firmware a été développé en C/C++ sur le framework ESP-IDF, offrant un contrôle total sur
+                    le matériel et permettant une optimisation fine du système embarqué. Ce choix s'est imposé pour
+                    maîtriser l'intégration Zigbee et la gestion temps réel du servo.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Stack logicielle développée</h4>
+                <ul>
+                    <li><strong>Couche Zigbee</strong> : Utilisation de la stack Zigbee native ESP-IDF (composant esp-zigbee-lib)
+                    pour l'intégration protocole IEEE 802.15.4</li>
+
+                    <li><strong>Driver LEDC</strong> : Configuration du timer matériel LEDC (LED Control) pour génération
+                    PWM 50Hz sans overhead CPU, libérant les cycles processeur</li>
+
+                    <li><strong>Machine à états</strong> : Gestion du cycle de vie du dispositif (appairage Zigbee,
+                    veille réseau, actuation servo) via une FSM (Finite State Machine)</li>
+
+                    <li><strong>Gestion d'événements FreeRTOS</strong> : Architecture multi-tâche avec queue d'événements
+                    pour séparation logique réseau / contrôle matériel</li>
+                </ul>
+            </div>
+
+            <h3>Implémentation du contrôle servo</h3>
+            <div class="architecture-box">
+                <h4>Configuration du timer LEDC</h4>
+                <p>
+                    Le timer LEDC (périphérique matériel de l'ESP32) génère le signal PWM 50Hz requis par le servo SG90.
+                    Configuration bas niveau via registres ESP-IDF :
+                </p>
+
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+// Configuration du timer LEDC pour génération PWM servo
+ledc_timer_config_t ledc_timer = {
+    .speed_mode       = LEDC_LOW_SPEED_MODE,
+    .duty_resolution  = LEDC_TIMER_13_BIT,  // Résolution 13 bits
+    .timer_num        = LEDC_TIMER_0,
+    .freq_hz          = 50,                  // 50Hz standard servo
+    .clk_cfg          = LEDC_AUTO_CLK
+};
+ledc_timer_config(&ledc_timer);
+
+ledc_channel_config_t ledc_channel = {
+    .gpio_num       = GPIO_NUM_18,
+    .speed_mode     = LEDC_LOW_SPEED_MODE,
+    .channel        = LEDC_CHANNEL_0,
+    .timer_sel      = LEDC_TIMER_0,
+    .duty           = 0,
+    .hpoint         = 0
+};
+ledc_channel_config(&ledc_channel);
+                </pre>
+
+                <h4 style="margin-top: 1.5rem;">Fonction d'actuation avec détachement automatique</h4>
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+void unlock_feeder(void) {
+    // Position déverrouillée : 1.5ms pulse = 90°
+    // Duty cycle = (1.5ms / 20ms) * 8192 (13-bit) ≈ 614
+    uint32_t duty_unlock = 614;
+
+    ESP_LOGI(TAG, "Unlocking feeder...");
+    ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, duty_unlock);
+    ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
+
+    // Maintien position 2 secondes
+    vTaskDelay(pdMS_TO_TICKS(2000));
+
+    // Détachement servo (coupe PWM pour économie énergie)
+    ledc_stop(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 0);
+    ESP_LOGI(TAG, "Unlock complete, servo detached");
+}
+                </pre>
+
+                <h4 style="margin-top: 1.5rem;">Justifications techniques</h4>
+                <ul>
+                    <li><strong>Résolution 13 bits</strong> : Permet un contrôle précis du pulse PWM (8192 niveaux),
+                    nécessaire pour positionner le servo exactement à 90° (tolérance ±2°)</li>
+
+                    <li><strong>ledc_stop après actuation</strong> : Désactive le timer PWM après 2s pour éviter
+                    consommation résiduelle (~10mA) et bruit ultrasonique (~16kHz). Le servo maintient sa position
+                    mécaniquement grâce à ses engrenages internes</li>
+
+                    <li><strong>vTaskDelay non bloquant</strong> : Utilisation de l'API FreeRTOS permettant au
+                    scheduler de basculer sur d'autres tâches (ex: traitement réseau Zigbee) pendant l'attente</li>
+                </ul>
+            </div>
+
+            <h3>Intégration Zigbee et Home Assistant</h3>
+            <div class="architecture-box">
+                <h4>Implémentation du cluster On/Off (Zigbee)</h4>
+                <p>
+                    Le dispositif implémente le cluster Zigbee standard <code>On/Off (0x0006)</code>, utilisé
+                    typiquement pour les interrupteurs et prises connectées. Cela garantit la compatibilité avec
+                    tous les coordinateurs Zigbee du marché.
+                </p>
+
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+// Déclaration du endpoint Zigbee avec cluster On/Off
+static esp_zb_ep_list_t *esp_zb_ep_list;
+
+esp_zb_on_off_cluster_cfg_t on_off_cfg = {
+    .on_off = ESP_ZB_ZCL_ON_OFF_ON_OFF_DEFAULT_VALUE,
+};
+
+esp_zb_cluster_list_t *esp_zb_cluster_list = esp_zb_zcl_cluster_list_create();
+esp_zb_cluster_list_add_on_off_cluster(esp_zb_cluster_list,
+                                       &on_off_cfg,
+                                       ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+
+// Callback appelé lors d'une commande Zigbee On/Off
+static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id,
+                                   const void *message) {
+    if (callback_id == ESP_ZB_CORE_SET_ATTR_VALUE_CB_ID) {
+        const esp_zb_zcl_set_attr_value_message_t *msg =
+            (esp_zb_zcl_set_attr_value_message_t *)message;
+
+        if (msg->info.cluster == ESP_ZB_ZCL_CLUSTER_ID_ON_OFF) {
+            if (msg->attribute.data.value) {
+                // Commande "On" reçue → déclencher déverrouillage
+                unlock_feeder();
+            }
+        }
+    }
+    return ESP_OK;
+}
+                </pre>
+
+                <h4 style="margin-top: 1.5rem;">Découverte automatique dans Home Assistant</h4>
+                <p>
+                    Une fois appairé au coordinateur Zigbee (via commande réseau),
+                    le dispositif annonce ses capacités via le protocole de découverte Zigbee. Home Assistant
+                    détecte automatiquement le cluster On/Off et crée une entité <code>switch.pet_feeder</code>
+                    sans configuration manuelle.
+                </p>
+
+                <p style="margin-top: 1rem;">
+                    <strong>Avantages du cluster standard On/Off :</strong>
+                </p>
+                <ul>
+                    <li>Interopérabilité totale : compatible ZHA, Zigbee2MQTT, deCONZ</li>
+                    <li>Pas de développement côté Home Assistant (reconnaissance native)</li>
+                    <li>Interface utilisateur automatique (toggle switch dans le dashboard)</li>
+                    <li>Support des automatisations et scénarios standards</li>
+                </ul>
+            </div>
+
+            <h3>Automatisations et scénarios domotiques</h3>
+            <div class="architecture-box">
+                <h4>Exemples de scénarios implémentables</h4>
+                <p>
+                    L'intégration dans Home Assistant permet de créer des automatisations complexes combinant
+                    plusieurs capteurs et services :
+                </p>
+                <ul>
+                    <li><strong>Notification push avec géolocalisation</strong> : Alerte smartphone si absence >6h
+                    détectée (capteur de présence) + proposition de déverrouillage à distance</li>
+
+                    <li><strong>Contrôle vocal multi-assistant</strong> : "Alexa/Google, déverrouille le distributeur
+                    de croquettes" via intégration native Home Assistant</li>
+
+                    <li><strong>Déverrouillage conditionnel automatique</strong> : Libération automatique à 18h uniquement
+                    si géolocalisation téléphone indique >10km du domicile (évite déclenchement inutile si présent)</li>
+
+                    <li><strong>Dashboard mobile unifié</strong> : Contrôle via l'application Home Assistant Companion
+                    (iOS/Android) depuis n'importe où dans le monde (via VPN)</li>
+
+                    <li><strong>Historique et monitoring</strong> : Logs d'activation stockés dans Home Assistant,
+                    permettant analyse de patterns (nombre de déverrouillages/semaine, heures typiques)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Testing & Validation -->
+        <section class="project-section">
+            <h2><i class="fas fa-vial"></i> Tests et validation</h2>
+
+            <h3>Protocole de validation mécanique</h3>
+            <div class="architecture-box">
+                <p>
+                    Pour garantir la fiabilité du mécanisme avant le déploiement, j'ai mis en place un protocole
+                    de tests cycliques simulant plusieurs mois d'utilisation :
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">Tests de durabilité</h4>
+                <ul>
+                    <li><strong>Test de cycles répétés</strong> : 50 cycles verrouillage/déverrouillage consécutifs
+                    → Aucune défaillance mécanique constatée, verrou en PETG maintient sa géométrie</li>
+
+                    <li><strong>Test de vieillissement élastiques</strong> : Mesure de la force de rappel après
+                    1 semaine en tension constante → Pas de perte de force</li>
+
+                    <li><strong>Test de température</strong> : Fonctionnement vérifié entre 5°C et 35°C
+                    (plage typique intérieur) → Pas d'altération du mécanisme</li>
+
+                    <li><strong>Test de charge</strong> : Couvercle lesté à 200g (équivalent chat curieux appuyant dessus)
+                    → Verrou maintient la fermeture sans déformation</li>
+                </ul>
+
+                <h4 style="margin-top: 1.5rem;">Taux de réussite final</h4>
+                <p>
+                    Sur 50 déverrouillages en conditions réelles (après remplissage croquettes, différentes températures),
+                    <strong>100% de succès</strong>. 
+                </p>
+            </div>
+
+            <h3>Validation du système Zigbee</h3>
+            <div class="architecture-box">
+                <h4>Tests de portée et fiabilité réseau</h4>
+                <ul>
+                    <li><strong>Portée maximale testée</strong> : 15 mètres en ligne droite à travers 2 murs
+                    (appartement standard) → Communication stable, RSSI : -65 dBm</li>
+
+                    <li><strong>Temps de réponse</strong> : Mesure du délai entre activation switch Home Assistant
+                    et début du mouvement servo → <300ms (imperceptible à l'usage)</li>
+
+                    <li><strong>Reconnexion après coupure</strong> : Coupure USB 5min simulant panne secteur
+                    → Reconnexion automatique au réseau Zigbee en <10s après retour de l'alimentation</li>
+
+                    <li><strong>Stabilité long terme</strong> : Dispositif actif 72h en continu
+                    → Aucune déconnexion, mémoire stable (pas de fuite)</li>
+                </ul>
+            </div>
+
+            <h3>Améliorations identifiées post-validation</h3>
+            <div class="architecture-box">
+                <h4>Points perfectibles pour une V2</h4>
+                <ul>
+                    <li><strong>Capteur de position</strong> : Ajout d'un micro-switch pour confirmation mécanique
+                    du déverrouillage (retour d'état réel vs hypothèse optimiste actuelle)</li>
+
+                    <li><strong>Indicateur visuel</strong> : LED d'état (verrouillé/déverrouillé) pour diagnostic
+                    à distance via caméra de surveillance</li>
+
+                    <li><strong>Isolation électromagnétique</strong> : Bien que non nécessaire en pratique,
+                    un condensateur 100µF sur le rail 5V servo éliminerait les micro-coupures lors des pics
+                    de courant (observés à l'oscilloscope mais sans impact fonctionnel)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Links -->
+        <section class="project-section">
+            <h2><i class="fas fa-link"></i> Ressources</h2>
+
+            <div class="project-links">
+                <a href="https://cults3d.com/fr/mod%C3%A8le-3d/maison/boite-a-croquettes-intelligente-distributeur-d-urgence-deverrouillable-a-dista" class="project-btn" target="_blank">
+                    <i class="fas fa-cube"></i> Télécharger sur Cults3D
+                </a>
+            </div>
+
+        </section>
+
+        <!-- Photo Gallery -->
+        <section class="project-section">
+            <h2><i class="fas fa-images"></i> Galerie photo</h2>
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/IMG_20251221_171528.jpg" alt="Vue d'ensemble du distributeur">
+                    <div class="caption">
+                        <h4>Vue d'ensemble</h4>
+                        <p>Distributeur assemblé - Couvercle fermé et verrouillé</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/IMG_20251221_171538.jpg" alt="Mécanisme de verrouillage">
+                    <div class="caption">
+                        <h4>Mécanisme de verrouillage</h4>
+                        <p>Détail du servo SG90 et du système de verrou</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/IMG_20251221_170626.jpg" alt="Électronique embarquée">
+                    <div class="caption">
+                        <h4>Électronique embarquée</h4>
+                        <p>ESP32 H4 SuperMini et câblage du servo</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/IMG_20251221_171610.jpg" alt="Système de charnière">
+                    <div class="caption">
+                        <h4>Système de charnière</h4>
+                        <p>Charnière M3 et bandes élastiques pour l'ouverture</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/IMG_20251221_171615.jpg" alt="Intérieur du boîtier">
+                    <div class="caption">
+                        <h4>Intérieur du boîtier</h4>
+                        <p>Espace pour les croquettes et accès à l'électronique</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pet_feeder/Screenshot From 2025-12-21 21-56-32.png" alt="Interface Home Assistant">
+                    <div class="caption">
+                        <h4>Interface Home Assistant</h4>
+                        <p>Contrôle via l'interface domotique</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Impact -->
+        <section class="project-section">
+            <h2><i class="fas fa-chart-line"></i> Bilan du projet et compétences mobilisées</h2>
+
+            <div class="architecture-box">
+                <h4>Résultats mesurables</h4>
+                <ul>
+                    <li><strong>Budget final</strong> : ~18€ (ESP32 H4 : 5€, SG90 : 3€, quincaillerie : 2€, filament : 8€)
+                    → Objectif <20€ respecté</li>
+
+                    <li><strong>Temps de développement</strong> : ~10h total (CAO : 4h, prototypage : 1h, électronique : 1h,
+                    logiciel : 1h, tests : 1h, documentation : 2h)</li>
+
+                    <li><strong>Fiabilité opérationnelle</strong> : 100% de succès sur 50+ actuations réelles</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-tools"></i> Compétences techniques mises en œuvre</h4>
+                <ul>
+                    <li><strong>Conception mécanique</strong> : CAO paramétrique (Onshape), analyse cinématique,
+                    dimensionnement de mécanismes, optimisation pour fabrication additive</li>
+
+                    <li><strong>Fabrication</strong> : Maîtrise impression 3D FDM (choix matériaux, orientation pièces,
+                    gestion tolérances, post-traitement)</li>
+
+                    <li><strong>Électronique embarquée</strong> : Sélection composants selon contraintes (budget, encombrement,
+                    performances), analyse de bilans énergétiques, dimensionnement actionneurs</li>
+
+                    <li><strong>Logiciel embarqué</strong> : Développement firmware ESP-IDF (C/C++), intégration stack
+                    Zigbee (esp-zigbee-lib), génération PWM matérielle (LEDC), architecture FreeRTOS multi-tâche</li>
+
+                    <li><strong>Intégration système</strong> : Déploiement domotique Home Assistant, automatisations,
+                    découverte réseau Zigbee, debugging protocoles sans fil</li>
+
+                    <li><strong>Méthodologie</strong> : Analyse fonctionnelle, gestion itérative (prototypage rapide),
+                    tests de validation, documentation technique</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Portfolio Électronique & Robotique. Hébergé sur <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

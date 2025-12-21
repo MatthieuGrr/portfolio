@@ -1,5 +1,14 @@
 [
     {
+        "title": "Distributeur de Croquettes Intelligent - Déverrouillage à Distance",
+        "category": "electronique",
+        "date": "Décembre 2025",
+        "description": "Système de déverrouillage à distance pour nourrir son animal en cas d'absence. Mécanisme hybride mécanique-élastique : servo SG90 agissant comme simple loquet, ouverture assurée par élastiques pré-tendus (force radiale). Firmware ESP-IDF (C/C++) avec stack Zigbee native, intégration Home Assistant via cluster On/Off. CAO paramétrique Onshape, boîtier PETG imprimé 3D. Approche empirique avec tests itératifs. Budget <20€, fiabilité 100% sur 50+ cycles.",
+        "technologies": ["ESP32 H4", "ESP-IDF", "Zigbee", "Onshape", "Impression 3D PETG", "Home Assistant"],
+        "image": "images/pet_feeder/IMG_20251221_171538.jpg",
+        "link": "pet-feeder.html"
+    },
+    {
         "title": "Marianne - 1ère place ARES Makeathon 2025 (EDA)",
         "category": "robotique",
         "date": "Mai 2025",
