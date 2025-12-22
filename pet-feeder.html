@@ -330,6 +330,30 @@
             color: var(--text-color);
         }
 
+        .project-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .project-image figcaption {
+            background: var(--card-background);
+            padding: 1rem;
+            text-align: center;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
         @media (max-width: 768px) {
             .project-hero {
                 background-attachment: scroll;
@@ -430,6 +454,11 @@
                     <li><strong>Maintenance minimale</strong> : Conception modulaire facilitant réparations et modifications</li>
                 </ul>
             </div>
+
+            <figure class="project-image">
+                <img src="images/pet_feeder/En situation avec chats.jpg" alt="Distributeur en situation avec les chats">
+                <figcaption>Le distributeur en situation réelle : solution pratique pour garantir l'alimentation des animaux en cas d'absence</figcaption>
+            </figure>
         </section>
 
         <!-- Design Process -->
@@ -548,6 +577,11 @@
                 </ul>
             </div>
 
+            <figure class="project-image">
+                <img src="images/pet_feeder/Vue éclatée CAO.png" alt="Vue éclatée CAO du distributeur">
+                <figcaption>Vue éclatée du modèle CAO : assemblage des 3 pièces principales (base, couvercle, système de verrouillage)</figcaption>
+            </figure>
+
             <h3>Cinématique du mécanisme de déverrouillage</h3>
             <div class="architecture-box">
                 <p>
@@ -575,6 +609,24 @@
                     2-3 élastiques standards (diamètre ~60mm) selon la force d'ouverture souhaitée.
                 </p>
             </div>
+
+            <figure class="project-image">
+                <img src="images/pet_feeder/Système de charnière
+Charnière M3 et bandes élastiques pour l'ouverture.jpg" alt="Système de charnière avec bandes élastiques">
+                <figcaption>Système de charnière M3 avec bandes élastiques pré-tendues assurant l'ouverture automatique du couvercle</figcaption>
+            </figure>
+
+            <figure class="project-image">
+                <img src="images/pet_feeder/Vue d'ensemble
+Distributeur assemblé - Couvercle fermé et verrouillé.jpg" alt="Vue d'ensemble distributeur fermé">
+                <figcaption>Vue d'ensemble du distributeur assemblé - Couvercle fermé et verrouillé par le palonnier du servo</figcaption>
+            </figure>
+
+            <figure class="project-image">
+                <img src="images/pet_feeder/Vue d'ensemble
+Distributeur assemblé - Couvercle ouvert.jpg" alt="Vue d'ensemble distributeur ouvert">
+                <figcaption>Vue d'ensemble du distributeur - Couvercle ouvert après déverrouillage, donnant accès aux croquettes</figcaption>
+            </figure>
 
             <h3>Optimisation pour la fabrication additive</h3>
             <div class="architecture-box">
@@ -674,126 +726,213 @@
             <h3>Architecture firmware ESP-IDF</h3>
             <div class="architecture-box">
                 <p>
-                    Le firmware a été développé en C/C++ sur le framework ESP-IDF, offrant un contrôle total sur
-                    le matériel et permettant une optimisation fine du système embarqué. Ce choix s'est imposé pour
-                    maîtriser l'intégration Zigbee et la gestion temps réel du servo.
+                    Le firmware a été développé en C sur le framework ESP-IDF v5.4.1+, offrant un contrôle total sur
+                    le matériel et permettant une optimisation fine du système embarqué. L'architecture modulaire sépare
+                    clairement les responsabilités : couche Zigbee, logique applicative et abstraction matérielle.
                 </p>
 
-                <h4 style="margin-top: 1.5rem;">Stack logicielle développée</h4>
+                <h4 style="margin-top: 1.5rem;">Organisation modulaire du code</h4>
                 <ul>
-                    <li><strong>Couche Zigbee</strong> : Utilisation de la stack Zigbee native ESP-IDF (composant esp-zigbee-lib)
-                    pour l'intégration protocole IEEE 802.15.4</li>
+                    <li><strong>esp_zb_feeder.c/h</strong> : Implémentation du dispositif Zigbee End Device (ZED) avec
+                    gestion du cycle de vie (appairage, steering réseau, traitement des signaux)</li>
 
-                    <li><strong>Driver LEDC</strong> : Configuration du timer matériel LEDC (LED Control) pour génération
-                    PWM 50Hz sans overhead CPU, libérant les cycles processeur</li>
+                    <li><strong>servo_driver.c/h</strong> : Driver matériel dédié pour le contrôle du servo SG90 via
+                    périphérique MCPWM, avec abstraction complète de la génération PWM</li>
 
-                    <li><strong>Machine à états</strong> : Gestion du cycle de vie du dispositif (appairage Zigbee,
-                    veille réseau, actuation servo) via une FSM (Finite State Machine)</li>
+                    <li><strong>Système de build CMake</strong> : Configuration ESP-IDF avec gestion des dépendances
+                    via <code>managed_components</code> et fichier de verrouillage pour builds reproductibles</li>
 
-                    <li><strong>Gestion d'événements FreeRTOS</strong> : Architecture multi-tâche avec queue d'événements
-                    pour séparation logique réseau / contrôle matériel</li>
+                    <li><strong>Configuration réseau</strong> : Partitionnement flash personnalisé (<code>partitions.csv</code>)
+                    et paramètres Zigbee optimisés dans <code>sdkconfig</code></li>
                 </ul>
             </div>
 
-            <h3>Implémentation du contrôle servo</h3>
+            <h3>Driver servo : périphérique MCPWM</h3>
             <div class="architecture-box">
-                <h4>Configuration du timer LEDC</h4>
+                <h4>Choix du périphérique matériel</h4>
                 <p>
-                    Le timer LEDC (périphérique matériel de l'ESP32) génère le signal PWM 50Hz requis par le servo SG90.
-                    Configuration bas niveau via registres ESP-IDF :
+                    Contrairement au périphérique LEDC classique, le MCPWM (Motor Control PWM) a été privilégié pour
+                    sa précision supérieure et son adéquation au contrôle moteur. Le SG90 requiert un signal PWM 50Hz
+                    (période 20ms) avec des pulses de 500µs à 2500µs pour couvrir la plage 0-180°.
                 </p>
 
                 <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
-// Configuration du timer LEDC pour génération PWM servo
-ledc_timer_config_t ledc_timer = {
-    .speed_mode       = LEDC_LOW_SPEED_MODE,
-    .duty_resolution  = LEDC_TIMER_13_BIT,  // Résolution 13 bits
-    .timer_num        = LEDC_TIMER_0,
-    .freq_hz          = 50,                  // 50Hz standard servo
-    .clk_cfg          = LEDC_AUTO_CLK
-};
-ledc_timer_config(&ledc_timer);
+// Conversion angle → largeur d'impulsion (interpolation linéaire)
+static inline uint32_t angle_to_pulse_width(uint32_t angle_degrees) {
+    return (SERVO_PULSE_WIDTH_MIN_US +
+           (angle_degrees * (SERVO_PULSE_WIDTH_MAX_US - SERVO_PULSE_WIDTH_MIN_US)) / 180);
+}
 
-ledc_channel_config_t ledc_channel = {
-    .gpio_num       = GPIO_NUM_18,
-    .speed_mode     = LEDC_LOW_SPEED_MODE,
-    .channel        = LEDC_CHANNEL_0,
-    .timer_sel      = LEDC_TIMER_0,
-    .duty           = 0,
-    .hpoint         = 0
-};
-ledc_channel_config(&ledc_channel);
+// Initialisation du timer MCPWM
+esp_err_t servo_driver_init(gpio_num_t gpio_pin) {
+    // Timer : 1MHz résolution, période 20000 ticks (20ms @ 50Hz)
+    mcpwm_timer_config_t timer_config = {
+        .group_id = 0,
+        .clk_src = MCPWM_TIMER_CLK_SRC_DEFAULT,
+        .resolution_hz = SERVO_TIMEBASE_RESOLUTION_HZ,  // 1MHz
+        .period_ticks = SERVO_TIMEBASE_PERIOD,          // 20000
+        .count_mode = MCPWM_TIMER_COUNT_MODE_UP,
+    };
+    mcpwm_new_timer(&timer_config, &timer);
+
+    // Opérateur et comparateur
+    mcpwm_operator_config_t operator_config = { .group_id = 0 };
+    mcpwm_new_operator(&operator_config, &oper);
+    mcpwm_operator_connect_timer(oper, timer);
+
+    mcpwm_comparator_config_t comparator_config = { .flags.update_cmp_on_tez = true };
+    mcpwm_new_comparator(oper, &comparator_config, &comparator);
+
+    // Générateur PWM sur GPIO
+    mcpwm_generator_config_t generator_config = { .gen_gpio_num = gpio_pin };
+    mcpwm_new_generator(oper, &generator_config, &generator);
+
+    // Logique PWM : HIGH au début, LOW au comparateur
+    mcpwm_generator_set_action_on_timer_event(generator,
+        MCPWM_GEN_TIMER_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP,
+                                      MCPWM_TIMER_EVENT_EMPTY,
+                                      MCPWM_GEN_ACTION_HIGH));
+    mcpwm_generator_set_action_on_compare_event(generator,
+        MCPWM_GEN_COMPARE_EVENT_ACTION(MCPWM_TIMER_DIRECTION_UP,
+                                        comparator,
+                                        MCPWM_GEN_ACTION_LOW));
+
+    mcpwm_timer_enable(timer);
+    mcpwm_timer_start_stop(timer, MCPWM_TIMER_START_NO_STOP);
+}
                 </pre>
 
-                <h4 style="margin-top: 1.5rem;">Fonction d'actuation avec détachement automatique</h4>
+                <h4 style="margin-top: 1.5rem;">Fonction de contrôle de position</h4>
                 <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
-void unlock_feeder(void) {
-    // Position déverrouillée : 1.5ms pulse = 90°
-    // Duty cycle = (1.5ms / 20ms) * 8192 (13-bit) ≈ 614
-    uint32_t duty_unlock = 614;
+esp_err_t servo_driver_set_position(bool unlocked) {
+    uint32_t angle = unlocked ? SERVO_ANGLE_UNLOCKED : SERVO_ANGLE_LOCKED;
+    uint32_t pulse_width_us = angle_to_pulse_width(angle);
 
-    ESP_LOGI(TAG, "Unlocking feeder...");
-    ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, duty_unlock);
-    ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0);
+    ESP_LOGI(TAG, "Setting servo to %s (angle=%lu°, pulse=%luµs)",
+             unlocked ? "UNLOCKED" : "LOCKED", angle, pulse_width_us);
 
-    // Maintien position 2 secondes
-    vTaskDelay(pdMS_TO_TICKS(2000));
-
-    // Détachement servo (coupe PWM pour économie énergie)
-    ledc_stop(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_0, 0);
-    ESP_LOGI(TAG, "Unlock complete, servo detached");
+    return mcpwm_comparator_set_compare_value(comparator, pulse_width_us);
 }
                 </pre>
 
                 <h4 style="margin-top: 1.5rem;">Justifications techniques</h4>
                 <ul>
-                    <li><strong>Résolution 13 bits</strong> : Permet un contrôle précis du pulse PWM (8192 niveaux),
-                    nécessaire pour positionner le servo exactement à 90° (tolérance ±2°)</li>
+                    <li><strong>Résolution 1MHz</strong> : Précision de 1µs sur les largeurs d'impulsion, permettant
+                    un contrôle fin de l'angle du servo (pas théorique de 0.09°/µs)</li>
 
-                    <li><strong>ledc_stop après actuation</strong> : Désactive le timer PWM après 2s pour éviter
-                    consommation résiduelle (~10mA) et bruit ultrasonique (~16kHz). Le servo maintient sa position
-                    mécaniquement grâce à ses engrenages internes</li>
+                    <li><strong>Interpolation linéaire</strong> : Conversion angle→pulse via formule générique,
+                    évite les valeurs hardcodées et facilite la calibration (macros <code>SERVO_ANGLE_LOCKED/UNLOCKED</code>)</li>
 
-                    <li><strong>vTaskDelay non bloquant</strong> : Utilisation de l'API FreeRTOS permettant au
-                    scheduler de basculer sur d'autres tâches (ex: traitement réseau Zigbee) pendant l'attente</li>
+                    <li><strong>MCPWM vs LEDC</strong> : Le MCPWM offre des triggers hardware et une logique d'action
+                    plus sophistiquée, bien que non exploités ici (architecture évolutive pour asservissement futur)</li>
                 </ul>
             </div>
 
             <h3>Intégration Zigbee et Home Assistant</h3>
             <div class="architecture-box">
-                <h4>Implémentation du cluster On/Off (Zigbee)</h4>
+                <h4>Architecture Zigbee End Device (ZED)</h4>
                 <p>
-                    Le dispositif implémente le cluster Zigbee standard <code>On/Off (0x0006)</code>, utilisé
-                    typiquement pour les interrupteurs et prises connectées. Cela garantit la compatibilité avec
-                    tous les coordinateurs Zigbee du marché.
+                    Le dispositif s'enregistre comme End Device Zigbee avec un profil "On/Off Light" standard,
+                    garantissant la compatibilité universelle avec tous les coordinateurs Zigbee du marché
+                    (ZHA, Zigbee2MQTT, deCONZ).
                 </p>
 
                 <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
-// Déclaration du endpoint Zigbee avec cluster On/Off
-static esp_zb_ep_list_t *esp_zb_ep_list;
+// Configuration End Device dans esp_zb_task()
+void esp_zb_task(void *pvParameters) {
+    esp_zb_cfg_t zb_nwk_cfg = ESP_ZB_ZED_CONFIG();
+    esp_zb_init(&zb_nwk_cfg);
 
-esp_zb_on_off_cluster_cfg_t on_off_cfg = {
-    .on_off = ESP_ZB_ZCL_ON_OFF_ON_OFF_DEFAULT_VALUE,
-};
+    // Création du endpoint HA avec cluster On/Off
+    esp_zb_on_off_light_cfg_t light_cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
+    esp_zb_ep_list_t *ep_list = esp_zb_on_off_light_ep_create(
+        HA_ESP_FEEDER_ENDPOINT, &light_cfg);
 
-esp_zb_cluster_list_t *esp_zb_cluster_list = esp_zb_zcl_cluster_list_create();
-esp_zb_cluster_list_add_on_off_cluster(esp_zb_cluster_list,
-                                       &on_off_cfg,
-                                       ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
+    // Ajout des attributs Basic Cluster (identification)
+    esp_zb_cluster_list_t *cluster_list =
+        esp_zb_ep_list_get_ep(ep_list, HA_ESP_FEEDER_ENDPOINT);
+    esp_zb_attribute_list_t *basic_cluster =
+        esp_zb_cluster_list_get_cluster(cluster_list,
+                                        ESP_ZB_ZCL_CLUSTER_ID_BASIC,
+                                        ESP_ZB_ZCL_CLUSTER_SERVER_ROLE);
 
-// Callback appelé lors d'une commande Zigbee On/Off
+    esp_zb_basic_cluster_add_attr(basic_cluster,
+                                  ESP_ZB_ZCL_ATTR_BASIC_MANUFACTURER_NAME_ID,
+                                  MANUFACTURER_NAME);
+    esp_zb_basic_cluster_add_attr(basic_cluster,
+                                  ESP_ZB_ZCL_ATTR_BASIC_MODEL_IDENTIFIER_ID,
+                                  MODEL_IDENTIFIER);
+
+    esp_zb_device_register(ep_list);
+    esp_zb_core_action_handler_register(zb_action_handler);
+    esp_zb_set_primary_network_channel_set(ESP_ZB_PRIMARY_CHANNEL_MASK);
+
+    esp_zb_start(false);
+    esp_zb_main_loop_iteration();
+}
+                </pre>
+
+                <h4 style="margin-top: 1.5rem;">Gestionnaire de signaux Zigbee</h4>
+                <p>
+                    Le <code>esp_zb_app_signal_handler</code> gère les événements du cycle de vie du dispositif :
+                    initialisation stack, premier démarrage (network steering automatique si factory-new),
+                    et confirmation de connexion réseau.
+                </p>
+
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+void esp_zb_app_signal_handler(esp_zb_app_signal_t *signal_struct) {
+    uint32_t *p_sg_p = signal_struct->p_app_signal;
+    esp_zb_app_signal_type_t sig_type = *p_sg_p;
+
+    switch (sig_type) {
+    case ESP_ZB_ZDO_SIGNAL_SKIP_STARTUP:
+        esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_INITIALIZATION);
+        break;
+
+    case ESP_ZB_BDB_SIGNAL_DEVICE_FIRST_START:
+        // Initialisation différée du servo en position verrouillée
+        servo_driver_init(SERVO_GPIO);
+        servo_driver_set_position(false);  // LOCKED par défaut
+
+        if (esp_zb_bdb_is_factory_new()) {
+            ESP_LOGI(TAG, "Factory reset, starting network steering...");
+            esp_zb_bdb_start_top_level_commissioning(ESP_ZB_BDB_MODE_NETWORK_STEERING);
+        }
+        break;
+
+    case ESP_ZB_BDB_SIGNAL_STEERING:
+        if (err_status == ESP_OK) {
+            ESP_LOGI(TAG, "Successfully joined Zigbee network");
+        } else {
+            ESP_LOGW(TAG, "Steering failed, retrying...");
+            esp_zb_scheduler_alarm(...);  // Retry automatique
+        }
+        break;
+    }
+}
+                </pre>
+
+                <h4 style="margin-top: 1.5rem;">Traitement des commandes On/Off</h4>
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">
+static esp_err_t zb_attribute_handler(const esp_zb_zcl_set_attr_value_message_t *message) {
+    if (message->info.cluster != ESP_ZB_ZCL_CLUSTER_ID_ON_OFF) {
+        return ESP_ERR_INVALID_ARG;
+    }
+
+    uint8_t value = message->attribute.data.value ? *(uint8_t *)message->attribute.data.value : 0;
+
+    if (message->attribute.id == ESP_ZB_ZCL_ATTR_ON_OFF_ON_OFF_ID) {
+        ESP_LOGI(TAG, "Received command: %s", value ? "UNLOCK" : "LOCK");
+        servo_driver_set_position((bool)value);
+    }
+
+    return ESP_OK;
+}
+
 static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id,
                                    const void *message) {
     if (callback_id == ESP_ZB_CORE_SET_ATTR_VALUE_CB_ID) {
-        const esp_zb_zcl_set_attr_value_message_t *msg =
-            (esp_zb_zcl_set_attr_value_message_t *)message;
-
-        if (msg->info.cluster == ESP_ZB_ZCL_CLUSTER_ID_ON_OFF) {
-            if (msg->attribute.data.value) {
-                // Commande "On" reçue → déclencher déverrouillage
-                unlock_feeder();
-            }
-        }
+        return zb_attribute_handler((esp_zb_zcl_set_attr_value_message_t *)message);
     }
     return ESP_OK;
 }
@@ -801,22 +940,27 @@ static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id,
 
                 <h4 style="margin-top: 1.5rem;">Découverte automatique dans Home Assistant</h4>
                 <p>
-                    Une fois appairé au coordinateur Zigbee (via commande réseau),
-                    le dispositif annonce ses capacités via le protocole de découverte Zigbee. Home Assistant
-                    détecte automatiquement le cluster On/Off et crée une entité <code>switch.pet_feeder</code>
-                    sans configuration manuelle.
+                    Une fois appairé au coordinateur Zigbee, le dispositif annonce ses capacités via le protocole
+                    de découverte Zigbee. Home Assistant (ZHA) ou Zigbee2MQTT détecte automatiquement le cluster
+                    On/Off et crée une entité <code>switch.cat_feeder</code> sans configuration manuelle.
                 </p>
 
                 <p style="margin-top: 1rem;">
-                    <strong>Avantages du cluster standard On/Off :</strong>
+                    <strong>Avantages du profil standard On/Off Light :</strong>
                 </p>
                 <ul>
-                    <li>Interopérabilité totale : compatible ZHA, Zigbee2MQTT, deCONZ</li>
-                    <li>Pas de développement côté Home Assistant (reconnaissance native)</li>
+                    <li>Interopérabilité totale : compatible ZHA, Zigbee2MQTT, deCONZ, Homey, Hubitat</li>
+                    <li>Pas de développement côté coordinateur (reconnaissance native)</li>
                     <li>Interface utilisateur automatique (toggle switch dans le dashboard)</li>
-                    <li>Support des automatisations et scénarios standards</li>
+                    <li>Support natif des automatisations et scénarios Home Assistant</li>
+                    <li>Identification via attributs Basic Cluster (manufacturer/model affichés dans l'UI)</li>
                 </ul>
             </div>
+
+            <figure class="project-image">
+                <img src="images/pet_feeder/graph reseau zigbee petfeeder en vert.png" alt="Graphe du réseau Zigbee avec le pet feeder">
+                <figcaption>Visualisation du réseau Zigbee dans Home Assistant : le distributeur (en vert) est correctement intégré au réseau maillé</figcaption>
+            </figure>
 
             <h3>Automatisations et scénarios domotiques</h3>
             <div class="architecture-box">
@@ -836,7 +980,7 @@ static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id,
                     si géolocalisation téléphone indique >10km du domicile (évite déclenchement inutile si présent)</li>
 
                     <li><strong>Dashboard mobile unifié</strong> : Contrôle via l'application Home Assistant Companion
-                    (iOS/Android) depuis n'importe où dans le monde (via VPN)</li>
+                    (iOS/Android) depuis n'importe où dans le monde (via VPN ou Nabu Casa)</li>
 
                     <li><strong>Historique et monitoring</strong> : Logs d'activation stockés dans Home Assistant,
                     permettant analyse de patterns (nombre de déverrouillages/semaine, heures typiques)</li>
@@ -917,60 +1061,14 @@ static esp_err_t zb_action_handler(esp_zb_core_action_callback_id_t callback_id,
             <h2><i class="fas fa-link"></i> Ressources</h2>
 
             <div class="project-links">
-                <a href="https://cults3d.com/fr/mod%C3%A8le-3d/maison/boite-a-croquettes-intelligente-distributeur-d-urgence-deverrouillable-a-dista" class="project-btn" target="_blank">
-                    <i class="fas fa-cube"></i> Télécharger sur Cults3D
+                <a href="https://github.com/MatthieuGrr/Cat-feeder" class="project-btn" target="_blank">
+                    <i class="fab fa-github"></i> Code source (GitHub)
+                </a>
+                <a href="https://cults3d.com/fr/mod%C3%A8le-3d/maison/boite-a-croquettes-intelligente-distributeur-d-urgence-deverrouillable-a-dista" class="project-btn secondary" target="_blank">
+                    <i class="fas fa-cube"></i> Fichiers STL (Cults3D)
                 </a>
             </div>
 
-        </section>
-
-        <!-- Photo Gallery -->
-        <section class="project-section">
-            <h2><i class="fas fa-images"></i> Galerie photo</h2>
-            <div class="image-gallery">
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/IMG_20251221_171528.jpg" alt="Vue d'ensemble du distributeur">
-                    <div class="caption">
-                        <h4>Vue d'ensemble</h4>
-                        <p>Distributeur assemblé - Couvercle fermé et verrouillé</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/IMG_20251221_171538.jpg" alt="Mécanisme de verrouillage">
-                    <div class="caption">
-                        <h4>Mécanisme de verrouillage</h4>
-                        <p>Détail du servo SG90 et du système de verrou</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/IMG_20251221_170626.jpg" alt="Électronique embarquée">
-                    <div class="caption">
-                        <h4>Électronique embarquée</h4>
-                        <p>ESP32 H4 SuperMini et câblage du servo</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/IMG_20251221_171610.jpg" alt="Système de charnière">
-                    <div class="caption">
-                        <h4>Système de charnière</h4>
-                        <p>Charnière M3 et bandes élastiques pour l'ouverture</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/IMG_20251221_171615.jpg" alt="Intérieur du boîtier">
-                    <div class="caption">
-                        <h4>Intérieur du boîtier</h4>
-                        <p>Espace pour les croquettes et accès à l'électronique</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/pet_feeder/Screenshot From 2025-12-21 21-56-32.png" alt="Interface Home Assistant">
-                    <div class="caption">
-                        <h4>Interface Home Assistant</h4>
-                        <p>Contrôle via l'interface domotique</p>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- Project Impact -->
