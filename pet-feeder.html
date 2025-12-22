@@ -59,7 +59,7 @@
         .project-hero {
             background:
                 linear-gradient(135deg, rgba(37, 99, 235, 0.85), rgba(124, 58, 237, 0.85)),
-                url('images/pet_feeder/IMG_20251221_171528.jpg');
+                url('images/pet_feeder/En situation avec chats.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -332,26 +332,54 @@
 
         .project-image {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
             margin: 2rem auto;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: auto !important;
+            background: none !important;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-image::after {
+            display: none !important;
         }
 
         .project-image img {
             width: 100%;
-            height: auto;
+            height: auto !important;
             display: block;
+            object-fit: contain !important;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.02);
         }
 
         .project-image figcaption {
-            background: var(--card-background);
-            padding: 1rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.8));
+            padding: 1.5rem 1rem;
             text-align: center;
             font-style: italic;
-            color: var(--text-secondary);
+            color: white;
             font-size: 0.95rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .project-image figcaption {
+            background: linear-gradient(to top, rgba(37, 99, 235, 0.9), rgba(37, 99, 235, 0.7));
+        }
+
+        .project-image:hover figcaption {
+            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
@@ -611,20 +639,17 @@
             </div>
 
             <figure class="project-image">
-                <img src="images/pet_feeder/Système de charnière
-Charnière M3 et bandes élastiques pour l'ouverture.jpg" alt="Système de charnière avec bandes élastiques">
+                <img src="images/pet_feeder/Système de charnière Charnière M3 et bandes élastiques pour l'ouverture.jpg" alt="Système de charnière avec bandes élastiques">
                 <figcaption>Système de charnière M3 avec bandes élastiques pré-tendues assurant l'ouverture automatique du couvercle</figcaption>
             </figure>
 
             <figure class="project-image">
-                <img src="images/pet_feeder/Vue d'ensemble
-Distributeur assemblé - Couvercle fermé et verrouillé.jpg" alt="Vue d'ensemble distributeur fermé">
+                <img src="images/pet_feeder/Vue d'ensemble Distributeur assemblé - Couvercle fermé et verrouillé.jpg" alt="Vue d'ensemble distributeur fermé">
                 <figcaption>Vue d'ensemble du distributeur assemblé - Couvercle fermé et verrouillé par le palonnier du servo</figcaption>
             </figure>
 
             <figure class="project-image">
-                <img src="images/pet_feeder/Vue d'ensemble
-Distributeur assemblé - Couvercle ouvert.jpg" alt="Vue d'ensemble distributeur ouvert">
+                <img src="images/pet_feeder/Vue d'ensemble Distributeur assemblé - Couvercle ouvert.jpg" alt="Vue d'ensemble distributeur ouvert">
                 <figcaption>Vue d'ensemble du distributeur - Couvercle ouvert après déverrouillage, donnant accès aux croquettes</figcaption>
             </figure>
 

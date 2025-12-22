@@ -1,11 +1,20 @@
 [
     {
+        "title": "FIPATECH - Coupe de France de Robotique 2026",
+        "category": "robotique",
+        "date": "Mai 2026",
+        "description": "Participation à la Coupe de France de Robotique 2026 avec l'équipe FIPATECH de l'ENSTA. Thème \"Winter is Coming\" : conception d'un robot autonome jouant le rôle d'écureuils devant récupérer des noisettes volées par des humains et les dissimuler avant leur retour. Missions : collecter les noisettes dans les caisses, les transporter et les cacher dans un temps limité. Compétition finale du 13 au 16 mai 2026 à La Roche-sur-Yon.",
+        "technologies": ["Robotique autonome", "Vision par ordinateur", "Navigation", "Manipulation d'objets", "Stratégie temps réel"],
+        "image": "images/CDFR2026/Pasted image.png",
+        "link": "https://presentation.fipatech.fr/"
+    },
+    {
         "title": "Distributeur de Croquettes Intelligent - Déverrouillage à Distance",
         "category": "electronique",
         "date": "Décembre 2025",
         "description": "Système de déverrouillage à distance pour nourrir son animal en cas d'absence. Mécanisme hybride mécanique-élastique : servo SG90 agissant comme simple loquet, ouverture assurée par élastiques pré-tendus (force radiale). Firmware ESP-IDF (C/C++) avec stack Zigbee native, intégration Home Assistant via cluster On/Off. CAO paramétrique Onshape, boîtier PETG imprimé 3D. Approche empirique avec tests itératifs. Budget <20€, fiabilité 100% sur 50+ cycles.",
         "technologies": ["ESP32 H4", "ESP-IDF", "Zigbee", "Onshape", "Impression 3D PETG", "Home Assistant"],
-        "image": "images/pet_feeder/IMG_20251221_171538.jpg",
+        "image": "images/pet_feeder/En situation avec chats.jpg",
         "link": "pet-feeder.html"
     },
     {
@@ -16,14 +25,6 @@
         "technologies": ["ESP32", "ROS2", "CAN Bus", "PCB Design", "ELRS", "Jetson Nano", "GNSS RTK", "KiCad"],
         "image": "images/marianne/winners-cropped_optimized.jpg",
         "link": "marianne-makeathon.html"
-    },
-    {
-        "title": "FIPATECH - Coupe de France de Robotique 2026",
-        "category": "robotique",
-        "date": "Mai 2026",
-        "description": "Participation à la Coupe de France de Robotique 2026 avec l'équipe FIPATECH de l'ENSTA. Thème \"Winter is Coming\" : conception d'un robot autonome jouant le rôle d'écureuils devant récupérer des noisettes volées par des humains et les dissimuler avant leur retour. Missions : collecter les noisettes dans les caisses, les transporter et les cacher dans un temps limité. Compétition finale du 13 au 16 mai 2026 à La Roche-sur-Yon.",
-        "technologies": ["Robotique autonome", "Vision par ordinateur", "Navigation", "Manipulation d'objets", "Stratégie temps réel"],
-        "image": "images/CDFR2026/Pasted image.png",
-        "link": "https://presentation.fipatech.fr/"
     }
+
 ]
