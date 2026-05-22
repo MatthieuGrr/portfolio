@@ -1,5 +1,14 @@
 [
     {
+        "title": "ENSTA Paris — Deux équipes à la Coupe de France de Robotique 2026",
+        "category": "robotique",
+        "date": "Mai 2026",
+        "description": "Article ENSTA Paris sur la participation des deux équipes ENSTA à la CDFR 2026. FIPATECH (dont je fais partie) termine 17ème sur 89 équipes, en forte progression par rapport à la 77ème place de 2025. Thème \"Winter is Coming\" : robots écureuils autonomes collectant des noisettes. Améliorations clés : mécanique, logiciel, stratégie de match et robots PAMIs secondaires. Financement Fondation ENSTA \"Faites-nous rêver\" 2026.",
+        "technologies": ["Robotique autonome", "Vision par ordinateur", "Navigation", "PAMI", "Stratégie de match"],
+        "image": "images/CDFR2026/ecu.png",
+        "link": "https://www.ensta.fr/actualites/deux-equipes-ensta-engagees-dans-la-coupe-de-france-de-robotique-2026"
+    },
+    {
         "title": "FIPATECH - Coupe de France de Robotique 2026",
         "category": "robotique",
         "date": "Mai 2026",
