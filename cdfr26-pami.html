@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PAMI — Robot Mobile Différentiel Open Source basé sur ESP32-S3 pour la Coupe de France de Robotique 2026">
+    <title>PAMI — Robot Mobile Différentiel | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        .nav-container {
+            justify-content: space-between !important;
+        }
+
+        .back-to-portfolio {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .back-to-portfolio:hover {
+            color: var(--primary-color);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        body.dark-mode .back-to-portfolio:hover {
+            background-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .back-to-portfolio i {
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-portfolio:hover i {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 480px) {
+            .back-to-portfolio span {
+                display: none;
+            }
+
+            .back-to-portfolio {
+                width: 40px;
+                height: 40px;
+                justify-content: center;
+                padding: 0;
+            }
+        }
+
+        .project-hero {
+            background:
+                linear-gradient(135deg, rgba(15, 52, 96, 0.88), rgba(37, 99, 235, 0.82)),
+                url('https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_16.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 0;
+        }
+
+        .project-hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .project-hero .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .project-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            overflow-x: hidden;
+        }
+
+        .project-section {
+            margin-bottom: 3rem;
+        }
+
+        .project-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-section h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--secondary-color);
+        }
+
+        .project-section p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .project-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-section ul li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .project-section ul li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .architecture-box {
+            background: var(--card-background);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            border: 2px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+        }
+
+        .highlight-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-btn.secondary {
+            background: var(--card-background);
+            color: var(--text-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            contain: layout;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 1.5rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+        }
+
+        .gallery-item .caption h4 {
+            margin: 0 0 0.25rem 0;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .gallery-item .caption p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .spec-card {
+            background: var(--card-background);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .spec-card .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .spec-card .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .project-image {
+            width: 100%;
+            max-width: 700px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: auto !important;
+            background: none !important;
+            position: relative;
+            cursor: pointer;
+            contain: layout;
+        }
+
+        .project-image::after {
+            display: none !important;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: auto !important;
+            display: block;
+            object-fit: contain !important;
+            transition: transform 0.3s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .project-image figcaption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(37, 99, 235, 0.95), rgba(37, 99, 235, 0.8));
+            padding: 1.5rem 1rem;
+            text-align: center;
+            font-style: italic;
+            color: white;
+            font-size: 0.95rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        body.dark-mode .project-image figcaption {
+            background: linear-gradient(to top, rgba(37, 99, 235, 0.9), rgba(37, 99, 235, 0.7));
+        }
+
+        .project-image:hover figcaption {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .project-hero {
+                background-attachment: scroll;
+                padding: 6rem 1rem 3rem;
+            }
+
+            .project-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-hero .icon {
+                font-size: 3rem;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .project-section {
+                margin-bottom: 2rem;
+            }
+
+            .project-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-content {
+                padding: 2rem 1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html#projets" class="back-to-portfolio">
+                <i class="fas fa-arrow-left"></i>
+                <span>Retour au portfolio</span>
+            </a>
+            <div class="nav-icons">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="icon"><i class="fas fa-robot"></i></div>
+        <h1>PAMI — Robot Mobile Différentiel Open Source</h1>
+        <p style="font-size: 1.3rem; margin-top: 1rem;">Firmware et PCB ESP32-S3 pour la Coupe de France de Robotique 2026</p>
+        <div class="project-meta">
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i>
+                <span>Mai 2026</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-microchip"></i>
+                <span>ESP32-S3 / ESP-IDF</span>
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-code-branch"></i>
+                <span>Open Source</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <div class="project-content">
+
+        <!-- Context -->
+        <section class="project-section">
+            <h2><i class="fas fa-flag-checkered"></i> Contexte : la Coupe de France de Robotique</h2>
+            <p>
+                La Coupe de France de Robotique est la plus grande compétition de robotique amateur en Europe (~100 équipes).
+                L'édition 2026 sur le thème <strong>"Winter is Coming"</strong> demandait aux robots de jouer le rôle
+                d'écureuils autonomes : collecter des noisettes et les dissimuler avant le retour des humains.
+                Les <strong>PAMIs</strong> (Petits Actionneurs Mobiles Indépendants) sont des robots secondaires qui
+                quittent la zone principale en fin de match pour marquer des points supplémentaires.
+            </p>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-bullseye"></i> Objectifs du projet</h4>
+                <ul>
+                    <li><strong>Robot compact et autonome</strong> : Navigation par waypoints sans infrastructure externe</li>
+                    <li><strong>Architecture temps réel robuste</strong> : FreeRTOS multi-tâche sur ESP32-S3</li>
+                    <li><strong>Interface de supervision complète</strong> : GUI Python + API REST + WebSocket</li>
+                    <li><strong>PCB dédié</strong> : KiCad 9 avec tous les composants intégrés</li>
+                    <li><strong>Open source</strong> : Firmware et hardware publiés pour la communauté robotique</li>
+                </ul>
+            </div>
+
+            <figure class="project-image">
+                <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_16.jpg" alt="PAMI robot vue d'ensemble">
+                <figcaption>Le PAMI en configuration finale : robot différentiel compact prêt pour la compétition</figcaption>
+            </figure>
+        </section>
+
+        <!-- Hardware -->
+        <section class="project-section">
+            <h2><i class="fas fa-microchip"></i> Architecture matérielle</h2>
+
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-microchip"></i></div>
+                    <div class="label">Microcontrôleur</div>
+                    <div class="value">ESP32-S3</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-cogs"></i></div>
+                    <div class="label">Motorisation</div>
+                    <div class="value">DRV8833</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-compass"></i></div>
+                    <div class="label">IMU 9 axes</div>
+                    <div class="value">ICM-20948</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-ruler"></i></div>
+                    <div class="label">ToF</div>
+                    <div class="value">VL53L0X</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-tv"></i></div>
+                    <div class="label">Afficheur</div>
+                    <div class="value">SSD1306 OLED</div>
+                </div>
+                <div class="spec-card">
+                    <div class="icon"><i class="fas fa-cog"></i></div>
+                    <div class="label">Actionneur</div>
+                    <div class="value">Servo SG90</div>
+                </div>
+            </div>
+
+            <h3>PCB KiCad 9</h3>
+            <div class="architecture-box">
+                <p>
+                    Le PCB a été conçu sous KiCad 9 en intégrant tous les composants nécessaires sur une carte compacte
+                    adaptée au gabarit du robot. Le dossier <code>hardware/PCB_Pami_V2/</code> est
+                    <strong>auto-suffisant</strong> : toutes les empreintes et symboles non-standard sont inclus,
+                    permettant une ouverture directe dans KiCad 9 sans dépendances externes.
+                </p>
+                <ul>
+                    <li><strong>ESP32-S3-DevKitC</strong> : Carte de développement montée sur le PCB via connecteurs</li>
+                    <li><strong>DRV8833</strong> : Driver pont H double pour commander les deux moteurs DM996 modifiés avec encodeurs</li>
+                    <li><strong>Servo SG90 (GPIO 14)</strong> : Servo standard dédié aux actions de jeu (balayage 60°–120° ou position fixe)</li>
+                    <li><strong>ICM-20948</strong> : IMU 9 axes (accéléromètre, gyroscope, magnétomètre) via I2C</li>
+                    <li><strong>VL53L0X</strong> : Capteur de distance Time-of-Flight (détection obstacles/bord de table)</li>
+                    <li><strong>TCS34725</strong> : Capteur couleur RGB présent sur le PCB — non implémenté dans le firmware actuel (intégration possible)</li>
+                    <li><strong>SSD1306</strong> : Afficheur OLED 128×64px pour le débogage en live</li>
+                    <li><strong>Boutons physiques</strong> : 3 boutons (gauche/milieu/droite) pour la sélection d'équipe (bleu/jaune) et le démarrage de mission</li>
+                    <li><strong>Connecteurs encodeurs</strong> : Interfaçage direct des roues codeuses quadrature (20 CPR × 4 = 80 ticks/tour)</li>
+                </ul>
+            </div>
+
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_17.jpg" alt="PCB PAMI">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_01.jpg" alt="PAMI assemblé">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_15.jpg" alt="PAMI en compétition">
+                </div>
+            </div>
+        </section>
+
+        <!-- Mechanical Design -->
+        <section class="project-section">
+            <h2><i class="fas fa-drafting-compass"></i> Conception mécanique</h2>
+
+            <div class="architecture-box">
+                <p>
+                    La mécanique a été modélisée sous <strong>OnShape</strong> en conception paramétrique,
+                    permettant des itérations rapides entre les cycles de prototypage et de validation.
+                    Le châssis imprimé en 3D intègre les emplacements des roues, du PCB et des capteurs
+                    dans un encombrement minimal pour respecter les contraintes de taille de la compétition.
+                </p>
+                <ul>
+                    <li><strong>Transmission différentielle</strong> : Deux moteurs DM996 modifiés avec encodeurs
+                    quadrature, commandés via le DRV8833</li>
+                    <li><strong>Roue folle avant</strong> : Troisième point d'appui pour la stabilité</li>
+                    <li><strong>Montage capteur ToF</strong> : VL53L0X orienté vers l'avant pour la détection
+                    de bord de table, des autres robots et la pause automatique de mission</li>
+                    <li><strong>Accès direct PCB</strong> : Conception modulaire pour faciliter les remplacements</li>
+                </ul>
+            </div>
+
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_02.jpg" alt="Vue mécanique">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_03.jpg" alt="Motorisation">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_04.jpg" alt="Vue capteurs">
+                </div>
+            </div>
+        </section>
+
+        <!-- Firmware Architecture -->
+        <section class="project-section">
+            <h2><i class="fas fa-code"></i> Architecture firmware</h2>
+
+            <p>
+                Le firmware est développé sur <strong>ESP-IDF v5.x</strong> avec FreeRTOS, structuré en modules
+                indépendants pour faciliter le développement et les tests. Chaque module encapsule une
+                responsabilité précise, communiquant via des queues et des semaphores FreeRTOS.
+            </p>
+
+            <div class="architecture-box">
+                <h4>Structure modulaire du projet</h4>
+                <ul>
+                    <li><strong>motion/</strong> : Contrôle mouvement — commandes <code>cmd_vel</code>, exécution de waypoints,
+                    contrôleur de point décalé (<em>offset point controller</em>)</li>
+                    <li><strong>localization/</strong> : Odométrie à partir des encodeurs, fusion avec l'IMU ICM-20948
+                    pour un suivi de position fiable</li>
+                    <li><strong>drivers/</strong> : Abstraction matérielle — DRV8833 (LEDC PWM), encodeurs quadrature,
+                    servo SG90, VL53L0X, SSD1306, MPU6050</li>
+                    <li><strong>sensors/</strong> : Drivers IMU (composant dédié <code>icm20948</code>) et capteur ToF</li>
+                    <li><strong>net/</strong> : Wi-Fi mode STA avec IP statique par robot_id, serveur HTTP pour l'API REST</li>
+                    <li><strong>ws/</strong> : Serveur WebSocket pour les logs en temps réel et la télémétrie</li>
+                    <li><strong>mission/</strong> : Séquenceur de missions — chargement et exécution de waypoints</li>
+                    <li><strong>config/</strong> : Configuration persistante via NVS (Non-Volatile Storage)</li>
+                    <li><strong>ota/</strong> : Mise à jour Over-The-Air pour le déploiement en compétition</li>
+                </ul>
+            </div>
+
+            <h3>Navigation par waypoints</h3>
+            <div class="architecture-box">
+                <p>
+                    Le PAMI navigue de manière entièrement autonome en suivant une liste de waypoints (x, y)
+                    définis dans la mission. La loi de commande retenue est un <strong>offset point controller</strong> :
+                    le contrôleur calcule la vitesse d'un point virtuel P situé à 50 mm devant le robot,
+                    puis en déduit les commandes (v, ω) par inversion cinématique. Cette approche
+                    produit des trajectoires fluides sans oscillations, même lors de l'enchaînement de
+                    waypoints intermédiaires à vitesse maximale.
+                </p>
+                <ul>
+                    <li><strong>Odométrie encodeurs</strong> : Calcul de (Δx, Δy, Δθ) depuis les
+                    impulsions quadrature des deux roues (80 ticks/tour, Ø 65,1 mm, empattement 106,8 mm)</li>
+                    <li><strong>Fusion IMU</strong> : Le gyroscope et le magnétomètre de l'ICM-20948 corrigent
+                    le cap odométrique — la fusion est effectuée directement sur la carte par le DMP de l'ICM-20948</li>
+                    <li><strong>Commande moteurs via DRV8833 + LEDC</strong> : Vitesse [-200, 200] mappée en
+                    PWM 10 bits avec zone morte de 145 ticks</li>
+                    <li><strong>Sécurité ToF</strong> : Pause automatique de la mission si obstacle détecté
+                    à moins de 150 mm (seuil configurable)</li>
+                    <li><strong>Tolérance d'arrivée</strong> : 80 mm en position, enchaînement fluide sur
+                    les waypoints intermédiaires (vitesse maximale maintenue)</li>
+                </ul>
+
+                <pre style="background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.85rem;">#define WHEEL_DIAMETER_MM  65.1f
+#define WHEEL_BASE_MM      106.8f
+#define MOTOR_DEAD_ZONE    145
+#define TOF_OBSTACLE_THRESHOLD_MM 150
+// IP statique : robot N → 192.168.0.(109+N)
+#define WIFI_IP_PREFIX     "192.168.0."</pre>
+            </div>
+
+            <h3>Interface réseau : API REST + WebSocket</h3>
+            <div class="architecture-box">
+                <p>
+                    Le robot se connecte en mode <strong>STA</strong> à un réseau Wi-Fi existant avec une
+                    IP statique calculée depuis son identifiant : le robot N obtient automatiquement
+                    l'adresse <code>192.168.0.(109+N)</code>. Il expose ensuite une API REST et un serveur
+                    WebSocket pour le contrôle et la supervision.
+                </p>
+                <ul>
+                    <li><strong>Wi-Fi mode STA + IP statique</strong> : Jusqu'à 6 robots sur le même réseau,
+                    chacun adressable depuis la GUI Python ou depuis l'UI du SSD1306</li>
+                    <li><strong>API REST</strong> : Commandes de vitesse, démarrage/arrêt des missions,
+                    lecture des capteurs, configuration des paramètres, OTA</li>
+                    <li><strong>WebSocket télémétrie</strong> : Stream continu de position, vitesses et
+                    état capteurs à 10 Hz pour la supervision en temps réel</li>
+                    <li><strong>WebSocket logs</strong> : Miroir des logs ESP-IDF dans la GUI Python pour
+                    le débogage sans câble série</li>
+                    <li><strong>OTA via HTTP</strong> : Upload du nouveau firmware depuis la GUI sans
+                    démonter le robot — essentiel pour les corrections rapides en compétition</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Python Tools -->
+        <section class="project-section">
+            <h2><i class="fab fa-python"></i> Outils Python de supervision</h2>
+
+            <p>
+                Un écosystème d'outils Python accompagne le firmware pour le développement, le débogage
+                et la préparation des missions en compétition.
+            </p>
+
+            <div class="architecture-box">
+                <h4>robot_gui.py — Interface de contrôle complète</h4>
+                <p>
+                    GUI graphique offrant une vue unifiée de l'état du robot : position estimée, vitesses,
+                    valeurs capteurs en temps réel, commandes manuelles et lancement de missions.
+                    Communique via l'API REST et le WebSocket du firmware.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">waypoint_editor.py — Éditeur de trajectoires visuel</h4>
+                <p>
+                    Outil interactif permettant de dessiner les trajectoires du PAMI directement sur une
+                    représentation de la table de compétition. Les waypoints créés sont sérialisés et
+                    automatiquement injectés dans le code source de la mission pour le prochain flash.
+                </p>
+
+                <h4 style="margin-top: 1.5rem;">robot_client.py — Client REST/WebSocket</h4>
+                <p>
+                    Bibliothèque Python réutilisable encapsulant toutes les interactions avec l'API du robot.
+                    Utilisée à la fois par la GUI et les scripts de test automatisés.
+                </p>
+            </div>
+
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_08.jpg" alt="GUI Python">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_09.jpg" alt="Éditeur waypoints">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_10.jpg" alt="Logs WebSocket">
+                </div>
+            </div>
+        </section>
+
+        <!-- Competition -->
+        <section class="project-section">
+            <h2><i class="fas fa-trophy"></i> Résultats en compétition</h2>
+
+            <div class="highlight-box">
+                <h4><i class="fas fa-chart-line"></i> CDFR 2026 — La Roche-sur-Yon, 13-16 mai 2026</h4>
+                <ul>
+                    <li><strong>17ème place sur 89 équipes</strong> pour l'équipe FIPATECH de l'ENSTA Paris</li>
+                    <li><strong>Forte progression</strong> par rapport à la 77ème place de l'édition 2025</li>
+                    <li>Les PAMIs ont contribué aux points en fin de match en atteignant leurs zones cibles</li>
+                    <li>Navigation autonome validée dans les conditions réelles de compétition</li>
+                </ul>
+            </div>
+
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_11.jpg" alt="">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_12.jpg" alt="">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_13.jpg" alt="">
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Source -->
+        <section class="project-section">
+            <h2><i class="fas fa-code-branch"></i> Open Source</h2>
+
+            <div class="architecture-box">
+                <p>
+                    L'ensemble du projet — firmware, PCB et outils Python — est publié en open source
+                    pour que d'autres équipes puissent s'en inspirer ou réutiliser directement les composants.
+                    Le dépôt inclut une documentation complète et un dev container Docker pour un environnement
+                    de développement ESP-IDF reproductible.
+                </p>
+                <ul>
+                    <li><strong>Firmware</strong> : Source complète ESP-IDF avec tous les modules</li>
+                    <li><strong>PCB KiCad 9</strong> : Schématique, routage et fichiers de fabrication</li>
+                    <li><strong>Outils Python</strong> : GUI, éditeur de waypoints et client REST</li>
+                    <li><strong>CAO Onshape</strong> : Modèle 3D paramétrique du châssis</li>
+                    <li><strong>Documentation</strong> : Guide de mise en route complet</li>
+                    <li><strong>Dev container</strong> : Environnement Docker avec ESP-IDF préconfiguré</li>
+                </ul>
+            </div>
+
+            <div class="project-links">
+                <a href="https://github.com/FIPATECH/CDFR26_PAMI" class="project-btn" target="_blank">
+                    <i class="fab fa-github"></i> Code source (GitHub)
+                </a>
+                <a href="https://cad.onshape.com/documents/61ace0f923b7d0711b02489a/w/a848013f17f87ac1439f2348/e/84637fd52d4c4f08dcf050f5" class="project-btn secondary" target="_blank">
+                    <i class="fas fa-cube"></i> CAO Onshape
+                </a>
+            </div>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="project-section">
+            <h2><i class="fas fa-tools"></i> Stack technique</h2>
+
+            <div class="tech-stack">
+                <span class="tech-tag">ESP32-S3</span>
+                <span class="tech-tag">ESP-IDF v5</span>
+                <span class="tech-tag">FreeRTOS</span>
+                <span class="tech-tag">C / C++</span>
+                <span class="tech-tag">KiCad 9</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">REST API</span>
+                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">Onshape</span>
+                <span class="tech-tag">DRV8833</span>
+                <span class="tech-tag">ICM-20948</span>
+                <span class="tech-tag">VL53L0X</span>
+                <span class="tech-tag">Impression 3D</span>
+                <span class="tech-tag">Docker</span>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 2rem;">
+                <h4><i class="fas fa-graduation-cap"></i> Compétences mises en œuvre</h4>
+                <ul>
+                    <li><strong>Robotique mobile</strong> : Cinématique différentielle, odométrie, fusion de capteurs,
+                    navigation par waypoints</li>
+                    <li><strong>Systèmes embarqués</strong> : Firmware ESP-IDF multi-tâche FreeRTOS, drivers matériels
+                    bas niveau, gestion temps réel</li>
+                    <li><strong>Électronique</strong> : Conception PCB KiCad, sélection et intégration de composants,
+                    routage multi-couches</li>
+                    <li><strong>Conception mécanique</strong> : CAO paramétrique Onshape, fabrication additive, intégration
+                    mécatronique</li>
+                    <li><strong>Développement logiciel</strong> : Architecture modulaire, API REST/WebSocket, outils GUI Python</li>
+                    <li><strong>Open source</strong> : Documentation technique, packaging reproductible (Docker devcontainer)</li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Portfolio Électronique & Robotique. Hébergé sur <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

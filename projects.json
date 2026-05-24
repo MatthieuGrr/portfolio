@@ -1,5 +1,14 @@
 [
     {
+        "title": "PAMI — Robot Mobile Différentiel Open Source (ESP32-S3)",
+        "category": "robotique",
+        "date": "Mai 2026",
+        "description": "Firmware et PCB open source pour robot mobile différentiel basé sur ESP32-S3, conçu pour la Coupe de France de Robotique 2026 (PAMI — Petit Actionneur Mobile Indépendant). Architecture ESP-IDF / FreeRTOS multi-tâche : odométrie, fusion IMU ICM-20948, navigation par waypoints, API REST + WebSocket, GUI Python avec éditeur de trajectoires visuel. PCB KiCad 9 auto-suffisant avec DRV8833, VL53L0X, TCS34725, SSD1306. Publié en open source avec documentation complète.",
+        "technologies": ["ESP32-S3", "ESP-IDF", "FreeRTOS", "KiCad 9", "Python", "REST/WebSocket", "Onshape", "Impression 3D"],
+        "image": "https://raw.githubusercontent.com/FIPATECH/CDFR26_PAMI/main/img/pami_16.jpg",
+        "link": "cdfr26-pami.html"
+    },
+    {
         "title": "ENSTA — Deux équipes à la Coupe de France de Robotique 2026",
         "category": "robotique",
         "date": "Mai 2026",
