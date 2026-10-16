@@ -1,0 +1,227 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import { formatDate, projectUrl, type Project } from '../lib/projects';
+
+interface Props {
+  project: Project;
+  variant?: 'featured' | 'compact';
+  eager?: boolean;
+  reverse?: boolean;
+}
+
+const { project, variant = 'compact', eager = false, reverse = false } = Astro.props;
+const { data } = project;
+const href = projectUrl(project);
+const featured = variant === 'featured';
+---
+
+<article class:list={['card', variant, { reverse }]}>
+  <a href={href} class="media" tabindex="-1" aria-hidden="true">
+    <Image
+      src={data.cover}
+      alt=""
+      widths={featured ? [640, 960, 1280] : [480, 720, 960]}
+      sizes={featured ? '(min-width: 900px) 640px, 100vw' : '(min-width: 900px) 380px, (min-width: 600px) 50vw, 100vw'}
+      loading={eager ? 'eager' : 'lazy'}
+    />
+  </a>
+  <div class="body">
+    <p class="meta mono">
+      <span>{formatDate(data.date)}</span>
+      <span aria-hidden="true">·</span>
+      <span>{data.category}</span>
+      {data.context.lieu && <span aria-hidden="true">·</span>}
+      {data.context.lieu && <span>{data.context.lieu}</span>}
+    </p>
+    <h3><a href={href}>{data.title}</a></h3>
+    <p class="summary">{data.summary}</p>
+    {
+      featured && data.stats.length > 0 && (
+        <dl class="stats">
+          {data.stats.slice(0, 3).map((s) => (
+            <div>
+              <dt class="sr-only">{s.label}</dt>
+              <dd>
+                <span class="mono value">{s.value}</span>
+                <span class="label">{s.label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )
+    }
+    <ul class="tags">
+      {data.tags.slice(0, featured ? 6 : 4).map((t) => <li>{t}</li>)}
+    </ul>
+    <span class="more" aria-hidden="true">
+      Lire la suite <Icon name="arrow-right" />
+    </span>
+  </div>
+</article>
+
+<style>
+  .card {
+    position: relative;
+    display: grid;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      border-color 0.2s,
+      transform 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--line-strong);
+  }
+
+  .card:focus-within {
+    border-color: var(--accent);
+  }
+
+  .media {
+    display: block;
+    overflow: hidden;
+    background: var(--surface-2);
+    aspect-ratio: 16 / 10;
+  }
+
+  .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover .media img {
+      transform: scale(1.03);
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 22px 22px 24px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Toute la carte est cliquable, via le lien du titre */
+  h3 a {
+    text-decoration: none;
+  }
+  h3 a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+  h3 a:focus-visible {
+    outline: none;
+  }
+
+  .summary {
+    color: var(--ink-2);
+    font-size: 0.975rem;
+  }
+
+  .tags {
+    margin-top: 4px;
+  }
+
+  .more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .card:hover .more :global(svg) {
+    transform: translateX(3px);
+  }
+  .more :global(svg) {
+    transition: transform 0.2s;
+  }
+
+  /* ── Variante mise en avant ── */
+  .featured .body {
+    padding: clamp(22px, 3vw, 40px);
+    gap: 16px;
+  }
+
+  .featured h3 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+  }
+
+  .featured .summary {
+    font-size: 1.0625rem;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1px;
+    margin: 4px 0 0;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+
+  .stats div {
+    background: var(--surface);
+    padding: 12px 14px;
+  }
+
+  .stats dd {
+    margin: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  .stats .value {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .stats .label {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    line-height: 1.3;
+  }
+
+  @media (min-width: 900px) {
+    .featured {
+      grid-template-columns: 1.15fr 1fr;
+    }
+
+    .featured .media {
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
+
+    .featured.reverse .media {
+      order: 2;
+    }
+  }
+</style>

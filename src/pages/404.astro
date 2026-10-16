@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Base title="Page introuvable">
+  <section class="container nf">
+    <p class="eyebrow mono"><b>404</b> / Page introuvable</p>
+    <h1>Cette page n’existe pas, ou plus.</h1>
+    <p>Le site a été réorganisé : les projets ont maintenant chacun leur adresse.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="/#projets">Voir les projets <Icon name="arrow-right" /></a>
+      <a class="btn" href="/">Accueil</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    display: grid;
+    gap: 18px;
+    padding-block: clamp(80px, 14vw, 160px);
+  }
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    max-width: 18ch;
+  }
+  p:not(.eyebrow) {
+    color: var(--ink-2);
+  }
+</style>

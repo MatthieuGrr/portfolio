@@ -1,339 +1,58 @@
-# 🎨 Portfolio Moderne - Architecture & Design
+# Portfolio de Matthieu Geörger
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=flat-square)](https://matthieugrr.github.io/portfolio/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)]()
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)]()
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)]()
+Site personnel : électronique embarquée et robotique, en ligne sur **[portfolio.georger.ovh](https://portfolio.georger.ovh)**.
 
-> Portfolio one-page moderne développé en JavaScript vanilla avec architecture modulaire et performances optimisées.
+Construit avec [Astro](https://astro.build) : site 100 % statique, images optimisées automatiquement (WebP, tailles adaptées à l’écran), aucun framework JavaScript côté navigateur.
 
-## 🎯 Objectifs du projet
+## Lancer le site en local
 
-Ce portfolio a été conçu avec les priorités suivantes :
-- **Performance** : Chargement ultra-rapide sans frameworks lourds
-- **Accessibilité** : Navigation intuitive et responsive
-- **Maintenabilité** : Code propre, commenté et modulaire
-- **UX/UI moderne** : Animations fluides et design épuré
+Prérequis : Node.js 22.22 ou plus récent.
 
-## 🏗️ Architecture technique
-
-### Stack technologique
-```
-Frontend Pure
-├── HTML5 sémantique
-├── CSS3 (variables, flexbox, grid)
-├── JavaScript ES6+ vanilla
-└── Font Awesome 6.5.1 (icônes)
+```sh
+npm install      # une seule fois
+npm run dev      # http://localhost:4321, rechargement automatique
+npm run build    # vérifie les types et génère le site dans dist/
 ```
 
-### Structure des fichiers
+## Organisation
+
 ```
-portfolio/
-├── index.html          # Structure HTML sémantique
-├── styles.css          # Styles avec variables CSS
-├── script.js           # Logique applicative
-├── projects.json       # Base de données des projets
-├── images/             # Assets optimisés
-│   ├── profil.jpg
-│   ├── IMG_2212.JPG
-│   └── CDFR2026/
-└── README.md
-```
-
-## ✨ Fonctionnalités techniques
-
-### 🎨 Design System
-
-#### Variables CSS
-Le projet utilise un système de variables CSS pour une personnalisation facile :
-```css
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #7c3aed;
-    --accent-color: #06b6d4;
-    --bg-color: #ffffff;
-    --text-color: #1e293b;
-}
+src/
+├── content/projects/      Un dossier par projet : index.md + photos
+│   └── _modele/           Modèle à copier pour un nouveau projet (ignoré par le site)
+├── data/site.ts           Textes de l’accueil : statut, chiffres clés, compétences, expérience, liens
+├── assets/                Photo du hero et portrait
+├── pages/                 Accueil, page projet générique, 404
+├── components/ layouts/   Briques d’interface
+└── styles/global.css      Couleurs (clair / sombre), typographie, styles communs
+public/                    Fichiers copiés tels quels (CNAME, favicon, CV, redirections)
 ```
 
-#### Mode sombre automatique
-- Détection et sauvegarde des préférences utilisateur
-- Toggle manuel avec icône animée
-- Transition fluide entre les modes
-- Persistence avec `localStorage`
+## Ajouter un projet
 
-### 📱 Responsive Design
+1. Copier `src/content/projects/_modele/` vers `src/content/projects/<nom-du-projet>/`. Le nom du dossier devient l’adresse `/projets/<nom-du-projet>/`.
+2. Déposer les photos dans ce dossier, en JPG ou PNG : le site les compresse lui-même.
+3. Remplir l’en-tête de `index.md` (titre, résumé, date, tags, couverture…) puis rédiger la page en Markdown. Chaque champ est expliqué dans le modèle.
+4. `npm run dev` pour vérifier, puis commit et push sur `main`.
 
-Breakpoints optimisés :
-- **Desktop** : 1200px+ (3 colonnes de projets)
-- **Tablette** : 768px-1199px (2 colonnes)
-- **Mobile** : <768px (1 colonne, menu caché)
+Si un champ obligatoire manque ou qu’une image est introuvable, `npm run build` le signale avec le nom du fichier.
 
-```css
-@media (max-width: 768px) {
-    .navbar { background-color: transparent; }
-    .tech-items { grid-template-columns: 1fr; }
-}
+Le projet apparaît automatiquement sur l’accueil, dans les jalons du parcours et dans la navigation entre projets. `featured: true` le met en grand en haut de la liste.
+
+## Ajouter le CV
+
+Déposer le PDF dans `public/` (par exemple `public/cv-matthieu-georger.pdf`), puis indiquer son chemin dans `src/data/site.ts` :
+
+```ts
+cv: '/cv-matthieu-georger.pdf',
 ```
 
-### ⚡ Optimisations de performance
+Les boutons « CV » apparaissent alors dans le hero et dans la section contact.
 
-#### Chargement différé
-```javascript
-// Intersection Observer pour animations au scroll
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-});
-```
+## Déploiement
 
-#### Lazy loading des projets
-- Chargement JSON asynchrone avec `fetch()`
-- Rendu dynamique des cartes
-- Filtrage côté client sans rechargement
+Chaque push sur `main` déclenche `.github/workflows/deploy.yml`, qui construit le site et le publie sur GitHub Pages. Les pull requests sont vérifiées par `.github/workflows/check.yml`.
 
-### 🎭 Animations & Interactions
+Réglage requis (une seule fois) : **Settings → Pages → Build and deployment → Source : GitHub Actions**. Le domaine personnalisé est défini par `public/CNAME`.
 
-#### Effets CSS
-- **Transform** : Scale, translateY pour les hover
-- **Transitions** : 0.3s ease pour fluidité
-- **Keyframes** : Gradient animé, typing effect, bounce
-
-#### JavaScript dynamique
-```javascript
-// Typing effect du hero
-const texts = [
-    { text: "Explorateur de ", highlight: "Technologies" },
-    { text: "Créateur de ", highlight: "Projets" },
-    { text: "Chercheur d'", highlight: "Idées ingénieuses" }
-];
-```
-
-### 🎯 Navigation dynamique
-
-- **Smooth scroll** vers les sections
-- **Active state** automatique selon la position
-- **Sticky navbar** avec effet au scroll
-- **Scroll indicator** animé sur le hero
-
-## 🎨 Design patterns utilisés
-
-### 1. **CSS BEM-like Naming**
-```css
-.tech-group
-.tech-group-title
-.tech-item
-.tech-item:hover
-```
-
-### 2. **Progressive Enhancement**
-- Fonctionne sans JavaScript (navigation basique)
-- Améliorations progressives (animations, filtres)
-
-### 3. **Mobile-First Approach**
-```css
-.tech-items {
-    grid-template-columns: 1fr; /* Mobile par défaut */
-}
-
-@media (min-width: 768px) {
-    .tech-items {
-        grid-template-columns: repeat(2, 1fr); /* Desktop */
-    }
-}
-```
-
-### 4. **DRY (Don't Repeat Yourself)**
-- Variables CSS réutilisables
-- Classes utilitaires (`.section-title`, `.btn`)
-- Fonctions JavaScript modulaires
-
-## 📊 Métriques de performance
-
-### Lighthouse Score (objectifs)
-- ⚡ **Performance** : 95+
-- ♿ **Accessibility** : 90+
-- 🎯 **Best Practices** : 95+
-- 🔍 **SEO** : 90+
-
-### Optimisations appliquées
-- ✅ Minification CSS/JS potentielle
-- ✅ Images optimisées (< 500KB)
-- ✅ Utilisation de `object-fit: cover`
-- ✅ Lazy loading des images projets
-- ✅ Pas de frameworks lourds (React, Vue, etc.)
-- ✅ CSS critique inline potentiel
-
-## 🎨 Composants UI
-
-### Hero Section
-- Background image avec overlay
-- Typing effect animé
-- CTA buttons avec hover effects
-- Scroll indicator bounce animation
-
-### Project Cards
-```css
-.project-card {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
-```
-
-### Tech Stack Items
-```css
-.tech-item:hover {
-    background: linear-gradient(135deg,
-                var(--primary-color),
-                var(--secondary-color));
-    transform: scale(1.05);
-}
-```
-
-### Système de filtres
-```javascript
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const filter = button.dataset.filter;
-        filterProjects(filter);
-    });
-});
-```
-
-## 🔧 Configuration & Personnalisation
-
-### Modifier les couleurs
-Dans `styles.css`, lignes 4-23 :
-```css
-:root {
-    --primary-color: #2563eb;     /* Couleur principale */
-    --secondary-color: #7c3aed;   /* Couleur secondaire */
-    --accent-color: #06b6d4;      /* Accent */
-    --border-radius: 12px;         /* Rayon des bordures */
-}
-```
-
-### Ajouter un projet
-Dans `projects.json` :
-```json
-{
-    "title": "Nom du projet",
-    "category": "electronique | robotique | programmation",
-    "date": "Mois AAAA",
-    "description": "Description détaillée",
-    "technologies": ["Tech1", "Tech2"],
-    "image": "chemin/image.jpg",
-    "link": "https://github.com/..."
-}
-```
-
-### Modifier les sections
-Structure HTML modulaire dans `index.html` :
-```html
-<section id="nom-section" class="nom-classe">
-    <div class="container">
-        <h2 class="section-title">Titre</h2>
-        <!-- Contenu -->
-    </div>
-</section>
-```
-
-## 🚀 Déploiement
-
-### GitHub Pages
-1. Push sur la branche `main`
-2. Settings → Pages → Source: main / root
-3. Site disponible à : `username.github.io/portfolio/`
-
-## 📈 Évolutions possibles
-
-### Améliorations techniques
-- [ ] Service Worker pour offline support
-- [ ] WebP avec fallback pour images
-- [ ] Critical CSS inline
-- [ ] Preload des fonts
-- [ ] Schema.org markup pour SEO
-
-### Nouvelles fonctionnalités
-- [ ] Formulaire de contact avec validation
-- [ ] Blog avec Markdown
-- [ ] Recherche full-text dans projets
-- [ ] i18n (multi-langues)
-- [ ] Analytics privacy-friendly
-
-## 🛠️ Développement local
-
-### Serveur de développement
-
-**Option 1 : Live Server (VS Code)**
-```bash
-# Extension: ritwickdey.liveserver
-Right-click index.html → Open with Live Server
-```
-
-**Option 2 : Python**
-```bash
-python -m http.server 8000
-# → http://localhost:8000
-```
-
-**Option 3 : Node.js**
-```bash
-npx serve .
-# → http://localhost:3000
-```
-
-### Tests de responsive
-- Chrome DevTools (F12)
-- Firefox Responsive Design Mode (Ctrl+Shift+M)
-- BrowserStack pour tests réels
-
-## 📝 Bonnes pratiques appliquées
-
-### HTML
-- ✅ Sémantique (header, nav, section, article)
-- ✅ Attributs alt sur images
-- ✅ Meta description et Open Graph
-- ✅ Aria labels sur boutons
-
-### CSS
-- ✅ Variables CSS pour maintenabilité
-- ✅ Mobile-first media queries
-- ✅ Transitions sur interactions
-- ✅ Pas de !important (sauf exceptions)
-
-### JavaScript
-- ✅ ES6+ (const, let, arrow functions)
-- ✅ Event delegation
-- ✅ Async/await pour fetch
-- ✅ Error handling
-
-### Performance
-- ✅ Minification potentielle
-- ✅ Compression gzip/brotli
-- ✅ Caching headers optimaux
-- ✅ CDN pour Font Awesome
-
-## 📚 Ressources & Références
-
-- [MDN Web Docs](https://developer.mozilla.org/)
-- [CSS-Tricks](https://css-tricks.com/)
-- [Web.dev Performance](https://web.dev/performance/)
-- [A11y Project](https://www.a11yproject.com/)
-
-## 📄 Licence
-
-Code disponible sous licence MIT pour consultation et apprentissage.
-
----
-
-**Développé avec ❤️ en JavaScript vanilla** | Hébergé sur [GitHub Pages](https://pages.github.com/)
+Les anciennes adresses (`pet-feeder.html`, `marianne-makeathon.html`, `cdfr26-pami.html`) redirigent vers les nouvelles pages projet, pour que les liens déjà partagés continuent de fonctionner.
