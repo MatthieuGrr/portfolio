@@ -12,6 +12,8 @@ const projects = await getProjects();
 const featured = projects.filter((p) => p.data.featured);
 const others = projects.filter((p) => !p.data.featured);
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+// Sans CV publié, le bouton ouvre un e-mail de demande prérempli
+const cvRequest = `mailto:${site.email}?subject=${encodeURIComponent('Demande de CV')}&body=${encodeURIComponent('Bonjour Matthieu,\n\nJ’ai consulté votre portfolio et souhaiterais recevoir votre CV.\n\n')}`;
 const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
@@ -30,9 +32,13 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
           <a class="btn btn-primary" href="#projets">Voir les projets <Icon name="arrow-right" /></a>
           <a class="btn" href="#contact">Me contacter</a>
           {
-            site.cv && (
+            site.cv ? (
               <a class="btn" href={site.cv} download>
                 <Icon name="download" /> CV
+              </a>
+            ) : (
+              <a class="btn" href={cvRequest}>
+                <Icon name="article" /> CV sur demande
               </a>
             )
           }
@@ -193,9 +199,13 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
           <a class="btn" href={site.linkedin} rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
           <a class="btn" href={site.github} rel="noopener"><Icon name="github" /> GitHub</a>
           {
-            site.cv && (
+            site.cv ? (
               <a class="btn" href={site.cv} download>
                 <Icon name="download" /> Télécharger mon CV
+              </a>
+            ) : (
+              <a class="btn" href={cvRequest}>
+                <Icon name="article" /> CV sur demande
               </a>
             )
           }

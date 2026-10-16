@@ -12,7 +12,7 @@ export const site = {
   github: 'https://github.com/MatthieuGrr',
   linkedin: 'https://www.linkedin.com/in/matthieu-ge%C3%B6rger-4433a1242/',
   // Chemin du CV une fois déposé dans public/ (ex. '/cv-matthieu-georger.pdf').
-  // Tant que la valeur est null, le bouton « CV » n'est pas affiché.
+  // Tant que la valeur est null, le bouton « CV sur demande » ouvre un e-mail prérempli.
   cv: null as string | null,
   // Statistiques Umami (auto-hébergé)
   analytics: {
@@ -76,7 +76,7 @@ export const skills = [
 
 export const experience = {
   title: 'Technicien avionique',
-  org: 'Aéronautique militaire',
+  org: 'Maintenance aéronautique',
   period: 'Actuellement',
-  text: 'Maintenance et diagnostic de systèmes avioniques, titulaire des licences Rafale et NH90. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
+  text: 'Maintenance et diagnostic de systèmes avioniques. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
 };
