@@ -21,10 +21,10 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
     <div class="container hero-grid">
       <div class="hero-text">
         <p class="status mono"><span class="dot" aria-hidden="true"></span>{site.status}</p>
-        <h1>Je conçois des robots, <span class="accent">du PCB au firmware.</span></h1>
+        <h1>Je conçois des systèmes autonomes, <span class="accent">de la CAO au logiciel.</span></h1>
         <p class="lead">
-          Roboticien autodidacte, je conçois des systèmes complets : électronique, logiciel embarqué et mécanique. Puis je
-          les éprouve sur le terrain, en compétition.
+          Roboticien autodidacte, je mène chaque projet de bout en bout : mécanique, électronique, logiciel embarqué. Puis
+          je l’éprouve sur le terrain, en compétition.
         </p>
         <div class="btn-row">
           <a class="btn btn-primary" href="#projets">Voir les projets <Icon name="arrow-right" /></a>
@@ -140,7 +140,7 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
       <div class="about-intro">
         <header class="section-head">
           <p class="eyebrow"><b>03</b> / Parcours</p>
-          <h2>Un passionné qui veut en faire son métier</h2>
+          <h2>Faire de ma passion mon métier</h2>
         </header>
         <div class="about-body">
           <Image src={portrait} alt="Portrait de Matthieu Geörger" widths={[240, 480]} sizes="240px" class="portrait" />
@@ -256,6 +256,7 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
   }
 
   .accent {
+    display: block;
     color: var(--accent);
   }
 
@@ -524,14 +525,14 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
     border-left: 1px solid var(--line-strong);
   }
 
-  .timeline li {
+  .timeline ol li {
     position: relative;
     display: grid;
     gap: 2px;
     padding: 0 0 18px 20px;
   }
 
-  .timeline li::before {
+  .timeline ol li::before {
     content: '';
     position: absolute;
     left: -4px;

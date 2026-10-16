@@ -80,5 +80,5 @@ export const experience = {
   title: 'Technicien avionique',
   org: 'Aéronautique militaire',
   period: 'Actuellement',
-  text: 'Maintenance et diagnostic de systèmes avioniques. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
+  text: 'Maintenance et diagnostic de systèmes avioniques, titulaire des licences Rafale et NH90. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
 };
