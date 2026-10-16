@@ -4,8 +4,8 @@ summary: Base différentielle conçue de bout en bout, du firmware moteur à l�
 date: 2026-10-08
 category: Robotique
 tags: [ROS 2 Jazzy, ros2_control, Nav2, C / C++, Pico 2, Python, Gazebo, Onshape]
-cover: ./rendu-cao.jpg
-coverAlt: Rendu de la CAO d’Alidade avec ses deux roues motrices, sa caméra RealSense et son LiDAR
+cover: ./cover.jpg
+coverAlt: Alidade sur fond orange, avec sa caméra RealSense à l’avant et son LiDAR sur le dessus
 featured: true
 order: 1
 context:
@@ -18,7 +18,12 @@ stats:
   - { value: '50 Hz', label: 'boucle ros2_control' }
   - { value: '150+', label: 'tests automatisés' }
 gallery:
-  - { src: ./rendu-cao-arriere.jpg, alt: 'Rendu de la CAO d’Alidade vu de l’arrière', caption: 'Révision v2 : châssis 250 × 252 mm, roues Ø 100 mm' }
+  - { src: ./trois-quarts.jpg, alt: 'Alidade vu de trois quarts avant sur un parquet', caption: 'Révision v2 : châssis 250 × 252 mm, roues Ø 100 mm' }
+  - { src: ./face.jpg, alt: 'Alidade vu de face, caméra RealSense sur son support' }
+  - { src: ./arriere.jpg, alt: 'Arrière d’Alidade avec l’arrêt d’urgence, la batterie et le Raspberry Pi 5', caption: 'Arrêt d’urgence, batterie et Raspberry Pi 5' }
+  - { src: ./arret-urgence.jpg, alt: 'Pupitre avec arrêt d’urgence, fusible et interrupteur', caption: 'Arrêt d’urgence, fusible et interrupteur' }
+  - { src: ./assemblage.jpg, alt: 'Alidade en cours d’assemblage, avant le montage de la caméra', caption: 'En cours d’assemblage, avant la caméra' }
+  - { src: ./rendu-cao.jpg, alt: 'Rendu de la CAO d’Alidade', caption: 'La CAO Onshape, exportée en URDF pour ROS 2' }
 ---
 
 ## Le projet
