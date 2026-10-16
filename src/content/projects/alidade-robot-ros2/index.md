@@ -25,7 +25,7 @@ gallery:
 
 Une alidade est la règle de visée que le topographe posait sur sa planchette pour relever un azimut et tracer une carte : l’ancêtre du LiDAR rotatif.
 
-Alidade est ma plateforme pour maîtriser **toute la chaîne d’un robot mobile ROS 2**, sans boîte noire : CAO, électronique, firmware temps réel, intégration `ros2_control`, cartographie, navigation, perception, interface opérateur et déploiement. Le principe directeur : **une valeur se mesure, elle ne se suppose pas**. Chaque constante du robot est mesurée sur le robot réel, datée et justifiée dans le dépôt.
+Alidade est d’abord un projet d’apprentissage. Je voulais une plateforme simple mais réellement fonctionnelle pour faire de la **vraie robotique** et tester beaucoup de choses, pas un robot Arduino à moteurs jaunes. Elle couvre donc **toute la chaîne d’un robot mobile ROS 2**, sans boîte noire : CAO, électronique, firmware temps réel, intégration `ros2_control`, cartographie, navigation, perception, interface opérateur et déploiement. Le principe directeur : **une valeur se mesure, elle ne se suppose pas**. Chaque constante du robot est mesurée sur le robot réel, datée et justifiée dans le dépôt.
 
 ## Architecture
 
@@ -100,5 +100,7 @@ En dialoguant avec le capteur en protocole brut, j’ai montré qu’il fonction
 Le dépôt documente une trentaine de pièges de ce type, chacun avec sa mesure et sa cause.
 
 ## Et ensuite
+
+Alidade va servir de plateforme d’essai pour des **algorithmes de planification par IA** lors du *Humanoid Defense Robot Hackathon*, organisé par l’Agence de l’innovation de défense et Artefact au Grand Palais, du 2 au 4 décembre 2026.
 
 La révision v2 du châssis est en cours de calibration. Prochaines étapes : un drapeau de validité IMU et une compensation de zone morte dans le firmware, une empreinte polygonale pour Nav2, et des zones interdites pour les vitres que le LiDAR voit mal.
