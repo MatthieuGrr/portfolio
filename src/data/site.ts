@@ -7,7 +7,7 @@ export const site = {
   url: 'https://portfolio.georger.ovh',
   description:
     'Roboticien autodidacte : PCB, firmware embarqué et mécanique. 1re place à l’ARES Makeathon 2025 (Agence européenne de défense), 17e sur 89 à la Coupe de France de Robotique 2026.',
-  status: 'Ouvert aux opportunités en robotique',
+  status: 'Disponible à partir de 2028',
   email: 'matthieu.georger@gmail.com',
   github: 'https://github.com/MatthieuGrr',
   linkedin: 'https://www.linkedin.com/in/matthieu-ge%C3%B6rger-4433a1242/',
@@ -24,7 +24,7 @@ export const site = {
 export const keyFigures = [
   { value: '1re place', label: 'ARES Makeathon 2025', detail: 'Agence européenne de défense' },
   { value: '17e / 89', label: 'Coupe de France de Robotique 2026', detail: '77e l’année précédente' },
-  { value: 'Open source', label: 'PAMI ESP32-S3', detail: 'Firmware, PCB et outils publiés' },
+  { value: '7 / 7', label: 'Dockings autonomes réussis', detail: 'Alidade, robot ROS 2 conçu seul' },
 ];
 
 export const skills = [
@@ -77,6 +77,6 @@ export const skills = [
 export const experience = {
   title: 'Technicien avionique',
   org: 'Maintenance aéronautique',
-  period: 'Actuellement',
+  period: 'Depuis 2017',
   text: 'Maintenance et diagnostic de systèmes avioniques. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
 };
