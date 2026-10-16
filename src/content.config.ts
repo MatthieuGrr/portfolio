@@ -16,7 +16,7 @@ const projects = defineCollection({
       // Une phrase, affichée sur les cartes et en partage (Open Graph)
       summary: z.string(),
       date: z.coerce.date(),
-      category: z.enum(['Robotique', 'Électronique', 'Logiciel embarqué', 'Mécanique']),
+      category: z.enum(['Robotique', 'Électronique', 'Logiciel embarqué', 'Mécanique', 'Application']),
       tags: z.array(z.string()).max(8),
       cover: image(),
       coverAlt: z.string(),
