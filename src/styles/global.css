@@ -398,3 +398,16 @@ ul {
 .prose em {
   font-style: italic;
 }
+
+.prose blockquote {
+  margin: 1.4em 0;
+  padding: 2px 0 2px 20px;
+  border-left: 3px solid var(--accent);
+  color: var(--ink);
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+.prose blockquote p + p {
+  margin-top: 0.6em;
+}

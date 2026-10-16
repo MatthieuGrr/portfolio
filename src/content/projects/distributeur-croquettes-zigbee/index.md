@@ -6,7 +6,7 @@ category: Électronique
 tags: [ESP-IDF, Zigbee, Home Assistant, Onshape, Impression 3D]
 cover: ./cover.jpg
 coverAlt: Deux chats mangeant dans le distributeur imprimé en 3D, couvercle ouvert
-order: 4
+order: 5
 context:
   equipe: Projet personnel
   duree: environ 10 h

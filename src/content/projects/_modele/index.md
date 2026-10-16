@@ -13,7 +13,7 @@
 title: Titre court du projet
 summary: Une phrase qui dit ce que c'est et ce qui le rend remarquable (affichée sur la carte).
 date: 2026-01-31                 # AAAA-MM-JJ, sert au tri et à l'affichage « Janvier 2026 »
-category: Robotique              # Robotique | Électronique | Logiciel embarqué | Mécanique
+category: Robotique              # Robotique | Électronique | Logiciel embarqué | Mécanique | Application
 tags: [ESP32, KiCad, ROS 2]      # 3 à 6 technologies principales (8 maximum)
 cover: ./cover.jpg               # image principale, de préférence au format paysage
 coverAlt: Description de la photo de couverture pour les lecteurs d'écran
