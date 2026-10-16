@@ -24,7 +24,7 @@ export const site = {
 export const keyFigures = [
   { value: '1re place', label: 'ARES Makeathon 2025', detail: 'Agence européenne de défense' },
   { value: '17e / 89', label: 'Coupe de France de Robotique 2026', detail: '77e l’année précédente' },
-  { value: 'Hackathon', label: 'Alidade, robot d’essai d’une équipe', detail: 'Agence de l’innovation de défense, déc. 2026' },
+  { value: 'Déc. 2026', label: 'Alidade au hackathon défense', detail: 'Plateforme d’essai d’une équipe, AID × Artefact' },
 ];
 
 export const skills = [
