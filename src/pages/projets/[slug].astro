@@ -1,0 +1,405 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { getProjects, formatDate, projectUrl, type Project } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: projects[i - 1] ?? null,
+      next: projects[i + 1] ?? null,
+    },
+  }));
+}
+
+interface Props {
+  project: Project;
+  prev: Project | null;
+  next: Project | null;
+}
+
+const { project, prev, next } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+
+const contextRows = [
+  ['Date', formatDate(data.date)],
+  ['Lieu', data.context.lieu],
+  ['Équipe', data.context.equipe],
+  ['Mon rôle', data.context.role],
+  ['Durée', data.context.duree],
+].filter((r): r is [string, string] => Boolean(r[1]));
+
+// Version grand format de chaque photo de la galerie, ouverte au clic
+const gallery = await Promise.all(
+  data.gallery.map(async (g) => ({
+    ...g,
+    full: await getImage({ src: g.src, width: Math.min(g.src.width, 2000), format: 'webp' }),
+  })),
+);
+---
+
+<Base title={data.title} description={data.summary} image={data.cover} type="article">
+  <article>
+    <header class="container head">
+      <a class="back" href="/#projets"><Icon name="arrow-left" /> Tous les projets</a>
+      <p class="eyebrow">{data.category}</p>
+      <h1>{data.title}</h1>
+      <p class="lead">{data.summary}</p>
+
+      <div class="head-meta">
+        <dl class="context">
+          {
+            contextRows.map(([k, v]) => (
+              <div>
+                <dt class="mono">{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        {
+          data.links.length > 0 && (
+            <div class="btn-row">
+              {data.links.map((l, i) => (
+                <a class:list={['btn', { 'btn-primary': i === 0 }]} href={l.url} rel="noopener">
+                  <Icon name={l.kind} /> {l.label}
+                  <Icon name="arrow-up-right" size={14} />
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="container">
+      <figure class="cover">
+        <Image
+          src={data.cover}
+          alt={data.coverAlt}
+          widths={[640, 960, 1400, 1920]}
+          sizes="(min-width: 1240px) 1160px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </figure>
+
+      {
+        data.stats.length > 0 && (
+          <dl class="stats">
+            {data.stats.map((s) => (
+              <div>
+                <dt>{s.label}</dt>
+                <dd class="mono">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+
+      <div class="layout">
+        <aside class="side">
+          <p class="eyebrow">Technologies</p>
+          <ul class="tags">{data.tags.map((t) => <li>{t}</li>)}</ul>
+        </aside>
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      {
+        gallery.length > 0 && (
+          <section class="gallery" aria-labelledby="galerie">
+            <h2 id="galerie">Galerie</h2>
+            <div class="gallery-grid">
+              {gallery.map((g) => (
+                <figure>
+                  <a href={g.full.src} target="_blank" rel="noopener">
+                    <Image src={g.src} alt={g.alt} widths={[400, 640, 900]} sizes="(min-width: 900px) 380px, (min-width: 600px) 50vw, 100vw" />
+                  </a>
+                  {g.caption && <figcaption>{g.caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          </section>
+        )
+      }
+
+      <nav class="pager" aria-label="Autres projets">
+        {
+          prev ? (
+            <a href={projectUrl(prev)} class="prev">
+              <span class="mono">
+                <Icon name="arrow-left" size={14} /> Précédent
+              </span>
+              {prev.data.title}
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          next && (
+            <a href={projectUrl(next)} class="next">
+              <span class="mono">
+                Suivant <Icon name="arrow-right" size={14} />
+              </span>
+              {next.data.title}
+            </a>
+          )
+        }
+      </nav>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .head {
+    padding-top: clamp(28px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+    display: grid;
+    gap: 14px;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    margin-bottom: clamp(16px, 3vw, 32px);
+    color: var(--ink-3);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .back:hover {
+    color: var(--ink);
+  }
+
+  .eyebrow {
+    color: var(--accent);
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    letter-spacing: -0.03em;
+    max-width: 20ch;
+  }
+
+  .lead {
+    max-width: 60ch;
+    font-size: clamp(1.0625rem, 1.6vw, 1.2rem);
+    color: var(--ink-2);
+  }
+
+  .head-meta {
+    display: grid;
+    gap: 24px;
+    margin-top: 18px;
+  }
+
+  @media (min-width: 900px) {
+    .head-meta {
+      grid-template-columns: 1fr auto;
+      align-items: end;
+    }
+  }
+
+  .context {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 32px;
+    margin: 0;
+  }
+
+  .context dt {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .context dd {
+    margin: 2px 0 0;
+    font-weight: 500;
+  }
+
+  .cover {
+    margin: 0;
+  }
+
+  .cover img {
+    width: 100%;
+    max-height: 640px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 24px 0 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--line);
+    gap: 1px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 760px) {
+    .stats {
+      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+      grid-auto-flow: column;
+    }
+  }
+
+  .stats div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+    padding: 18px 20px;
+    background: var(--surface);
+  }
+
+  .stats dd {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  .stats dt {
+    color: var(--ink-3);
+    font-size: 0.875rem;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    padding-block: clamp(40px, 6vw, 72px);
+  }
+
+  @media (min-width: 960px) {
+    .layout {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 64px;
+    }
+    .side {
+      position: sticky;
+      top: calc(var(--header-h) + 24px);
+      align-self: start;
+    }
+  }
+
+  .side .eyebrow {
+    color: var(--ink-3);
+    margin-bottom: 12px;
+  }
+
+  .gallery {
+    padding-block: clamp(40px, 6vw, 64px);
+    border-top: 1px solid var(--line);
+  }
+
+  .gallery h2 {
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+  }
+
+  .gallery-grid {
+    columns: 1;
+    column-gap: 16px;
+  }
+
+  @media (min-width: 600px) {
+    .gallery-grid {
+      columns: 2;
+    }
+  }
+  @media (min-width: 960px) {
+    .gallery-grid {
+      columns: 3;
+    }
+  }
+
+  .gallery figure {
+    break-inside: avoid;
+    margin: 0 0 16px;
+  }
+
+  .gallery a {
+    display: block;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+  }
+
+  .gallery img {
+    width: 100%;
+    transition: transform 0.4s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery a:hover img {
+      transform: scale(1.02);
+    }
+  }
+
+  .gallery figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-3);
+  }
+
+  .pager {
+    display: grid;
+    gap: 16px;
+    padding-block: 32px clamp(48px, 8vw, 96px);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 700px) {
+    .pager {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .pager a {
+    display: grid;
+    gap: 6px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .pager a:hover {
+    border-color: var(--line-strong);
+  }
+
+  .pager .mono {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  .pager .next {
+    text-align: right;
+    justify-items: end;
+  }
+</style>

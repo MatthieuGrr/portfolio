@@ -1,0 +1,614 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Icon from '../components/Icon.astro';
+import { site, keyFigures, skills, tooling, experience } from '../data/site';
+import { getProjects, formatDate, projectUrl } from '../lib/projects';
+import hero from '../assets/hero.jpg';
+import portrait from '../assets/profil.jpg';
+
+const projects = await getProjects();
+const featured = projects.filter((p) => p.data.featured);
+const others = projects.filter((p) => !p.data.featured);
+const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Base>
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <p class="status mono"><span class="dot" aria-hidden="true"></span>{site.status}</p>
+        <h1>Je conçois des robots, <span class="accent">du PCB au firmware.</span></h1>
+        <p class="lead">
+          Roboticien autodidacte, je conçois des systèmes complets : électronique, logiciel embarqué et mécanique. Puis je
+          les éprouve sur le terrain, en compétition.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#projets">Voir les projets <Icon name="arrow-right" /></a>
+          <a class="btn" href="#contact">Me contacter</a>
+          {
+            site.cv && (
+              <a class="btn" href={site.cv} download>
+                <Icon name="download" /> CV
+              </a>
+            )
+          }
+        </div>
+      </div>
+      <figure class="hero-media">
+        <Image
+          src={hero}
+          alt="Sur le terrain avec Marianne, robot terrestre de 48 kg"
+          widths={[640, 960, 1400]}
+          sizes="(min-width: 960px) 560px, 100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption class="mono">Marianne : UGV de 48 kg, 1re place ARES Makeathon 2025</figcaption>
+      </figure>
+    </div>
+
+    <div class="container">
+      <dl class="figures">
+        {
+          keyFigures.map((f) => (
+            <div>
+              <dt>
+                {f.label}
+                <span>{f.detail}</span>
+              </dt>
+              <dd class="mono">{f.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Projets ────────────────────────────────────────────────────────── -->
+  <section class="section" id="projets">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow"><b>01</b> / Projets</p>
+        <h2>Des systèmes conçus, construits et testés</h2>
+        <p>Chaque projet est documenté de bout en bout : besoin, choix techniques, validation.</p>
+      </header>
+
+      <div class="featured">
+        {featured.map((p, i) => <ProjectCard project={p} variant="featured" reverse={i % 2 === 1} />)}
+      </div>
+
+      {
+        others.length > 0 && (
+          <div class="grid">
+            {others.map((p) => (
+              <ProjectCard project={p} />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- ── Compétences ────────────────────────────────────────────────────── -->
+  <section class="section" id="competences">
+    <div class="container">
+      <header class="section-head">
+        <p class="eyebrow"><b>02</b> / Compétences</p>
+        <h2>De la carte électronique au robot qui roule</h2>
+        <p>Les outils que j’utilise, et les projets où je les ai mis en œuvre.</p>
+      </header>
+
+      <div class="skills">
+        {
+          skills.map((s, i) => (
+            <article class="skill">
+              <p class="mono idx">{String(i + 1).padStart(2, '0')}</p>
+              <h3>{s.domain}</h3>
+              <ul>
+                {s.items.map((it) => (
+                  <li>{it}</li>
+                ))}
+              </ul>
+              <p class="proof">
+                <span class="mono">Mis en œuvre :</span>
+                {s.proof
+                  .map((id) => byId[id])
+                  .filter(Boolean)
+                  .map((p) => (
+                    <a href={projectUrl(p)}>{p.data.title.split(',')[0]}</a>
+                  ))}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="tooling">
+        <span class="mono">Au quotidien</span>
+        {tooling.join(' · ')}
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Parcours ───────────────────────────────────────────────────────── -->
+  <section class="section" id="parcours">
+    <div class="container about">
+      <div class="about-intro">
+        <header class="section-head">
+          <p class="eyebrow"><b>03</b> / Parcours</p>
+          <h2>Un passionné qui veut en faire son métier</h2>
+        </header>
+        <div class="about-body">
+          <Image src={portrait} alt="Portrait de Matthieu Geörger" widths={[240, 480]} sizes="240px" class="portrait" />
+          <div class="about-text">
+            <p>
+              L’électronique et la robotique me passionnent depuis toujours. Je me suis formé en autodidacte, projet après
+              projet, en m’imposant les outils et les méthodes de l’industrie : KiCad, ESP-IDF, ROS 2, CAO paramétrique,
+              Git.
+            </p>
+            <p>
+              Mon métier de technicien avionique m’a donné une rigueur que j’applique à chaque projet : procédures,
+              diagnostic méthodique, fiabilité avant tout.
+            </p>
+            <p>
+              Aujourd’hui, je souhaite mettre ces compétences au service d’une équipe qui conçoit des robots.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <h3 class="eyebrow">Jalons</h3>
+        <ol>
+          {
+            milestones.map((p) => (
+              <li>
+                <span class="mono when">{formatDate(p.data.date)}</span>
+                <a href={projectUrl(p)}>{p.data.title}</a>
+              </li>
+            ))
+          }
+        </ol>
+        <h3 class="eyebrow">Expérience professionnelle</h3>
+        <div class="job">
+          <p class="mono when">{experience.period}</p>
+          <p class="job-title">{experience.title} <span>· {experience.org}</span></p>
+          <p class="job-text">{experience.text}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ────────────────────────────────────────────────────────── -->
+  <section class="section contact" id="contact">
+    <div class="container contact-inner">
+      <div>
+        <p class="eyebrow"><b>04</b> / Contact</p>
+        <h2>Un projet, un poste, une question ?</h2>
+        <p class="lead">Je suis ouvert aux opportunités en robotique et en systèmes embarqués. Écrivez-moi, je réponds rapidement.</p>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn-primary big" href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a>
+        <div class="btn-row">
+          <a class="btn" href={site.linkedin} rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
+          <a class="btn" href={site.github} rel="noopener"><Icon name="github" /> GitHub</a>
+          {
+            site.cv && (
+              <a class="btn" href={site.cv} download>
+                <Icon name="download" /> Télécharger mon CV
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: clamp(40px, 7vw, 88px) clamp(40px, 6vw, 72px);
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-grid {
+      grid-template-columns: 1.05fr 1fr;
+    }
+  }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 0.8125rem;
+    color: var(--ink-2);
+    margin-bottom: 28px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ok) 20%, transparent);
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 14ch;
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+
+  .lead {
+    margin-top: 22px;
+    max-width: 52ch;
+    font-size: clamp(1.0625rem, 1.6vw, 1.2rem);
+    color: var(--ink-2);
+  }
+
+  .hero-text .btn-row {
+    margin-top: 32px;
+  }
+
+  .hero-media {
+    margin: 0;
+  }
+
+  .hero-media img {
+    width: 100%;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    object-position: 38% 50%;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+
+  .hero-media figcaption {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  .figures {
+    display: grid;
+    margin: clamp(40px, 6vw, 72px) 0 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .figures > div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .figures dd {
+    margin: 0;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .figures dt {
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .figures dt span {
+    display: block;
+    font-weight: 400;
+    color: var(--ink-3);
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: 760px) {
+    .figures {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .figures > div {
+      border-bottom: 0;
+      padding: 26px 24px 0 0;
+    }
+    .figures > div + div {
+      padding-left: 24px;
+      border-left: 1px solid var(--line);
+    }
+  }
+
+  /* Projets */
+  .featured {
+    display: grid;
+    gap: 24px;
+  }
+
+  .grid {
+    display: grid;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  @media (min-width: 600px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 960px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Compétences */
+  .skills {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  @media (min-width: 640px) {
+    .skills {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1040px) {
+    .skills {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .skill {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 26px 24px;
+    background: var(--surface);
+  }
+
+  .idx {
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+
+  .skill h3 {
+    font-size: 1.15rem;
+  }
+
+  .skill ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .skill li {
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .skill li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 1px;
+    background: var(--ink-3);
+  }
+
+  .proof {
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+  }
+
+  .proof .mono {
+    font-size: 0.75rem;
+    width: 100%;
+  }
+
+  .proof a {
+    color: var(--ink-2);
+    text-underline-offset: 3px;
+    text-decoration-color: var(--line-strong);
+  }
+
+  .proof a:hover {
+    color: var(--accent);
+  }
+
+  .tooling {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  .tooling .mono {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding-top: 3px;
+  }
+
+  /* Parcours */
+  .about {
+    display: grid;
+    gap: clamp(40px, 6vw, 80px);
+  }
+
+  @media (min-width: 960px) {
+    .about {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .about-body {
+    display: grid;
+    gap: 28px;
+  }
+
+  @media (min-width: 600px) {
+    .about-body {
+      grid-template-columns: 160px 1fr;
+      align-items: start;
+    }
+  }
+
+  .portrait {
+    width: 160px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+  }
+
+  .about-text {
+    display: grid;
+    gap: 16px;
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+  }
+
+  .timeline {
+    display: grid;
+    gap: 16px;
+    align-content: start;
+  }
+
+  .timeline h3 {
+    font-weight: 400;
+  }
+
+  .timeline h3 + * {
+    margin-bottom: 20px;
+  }
+
+  .timeline ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-left: 1px solid var(--line-strong);
+  }
+
+  .timeline li {
+    position: relative;
+    display: grid;
+    gap: 2px;
+    padding: 0 0 18px 20px;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 7px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--accent);
+  }
+
+  .when {
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    text-transform: uppercase;
+  }
+
+  .timeline a {
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .timeline a:hover {
+    color: var(--accent);
+  }
+
+  .job {
+    display: grid;
+    gap: 6px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .job-title {
+    font-weight: 600;
+  }
+
+  .job-title span {
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .job-text {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+
+  /* Contact */
+  .contact-inner {
+    display: grid;
+    gap: 36px;
+    align-items: end;
+  }
+
+  @media (min-width: 960px) {
+    .contact-inner {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .contact h2 {
+    margin-top: 12px;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    max-width: 16ch;
+  }
+
+  .contact-links {
+    display: grid;
+    gap: 12px;
+  }
+
+  .btn.big {
+    min-height: 56px;
+    font-size: 1rem;
+    justify-content: center;
+    overflow-wrap: anywhere;
+  }
+</style>
