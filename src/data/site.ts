@@ -70,7 +70,7 @@ export const skills = [
       'Découpe laser',
       'Conception pour la fabrication',
     ],
-    proof: ['distributeur-croquettes-zigbee', 'pami-cdfr-2026'],
+    proof: ['marianne-ugv-ares-makeathon', 'pami-cdfr-2026', 'distributeur-croquettes-zigbee'],
   },
 ];
 

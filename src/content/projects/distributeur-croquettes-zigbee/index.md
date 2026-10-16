@@ -45,13 +45,13 @@ La CAO, paramétrique sous Onshape, intègre les règles de la fabrication addit
 
 ## Électronique
 
-L’architecture est volontairement minimale : un **ESP32-H4 SuperMini** et le servo, trois connexions.
+L’architecture est volontairement minimale : un **ESP32-H2 SuperMini** et le servo, trois connexions.
 
 - 5 V USB vers l’ESP32 et le servo (le servo ne passe pas par le régulateur 3,3 V)
 - masse commune
 - une GPIO en PWM vers le servo, qui accepte directement la logique 3,3 V
 
-Le choix de l’ESP32-H4 tient à sa **radio IEEE 802.15.4 intégrée** : Zigbee natif sans module externe, pour environ 5 €.
+Le choix de l’ESP32-H2 tient à sa **radio IEEE 802.15.4 intégrée** : Zigbee natif sans module externe, pour environ 5 €.
 
 ## Firmware
 

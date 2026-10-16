@@ -10,6 +10,7 @@ order: 4
 context:
   lieu: La Roche-sur-Yon
   equipe: FIPATECH
+  role: 'Conception et réalisation des PAMI'
 stats:
   - { value: '17e / 89', label: 'classement final' }
   - { value: '+60', label: 'places gagnées en un an' }
@@ -26,7 +27,7 @@ Pour l’édition 2026, *Winter is Coming*, les robots incarnent des écureuils 
 
 FIPATECH est l’équipe de robotique de l’ENSTA. Pour cette édition, le travail a porté sur la mécanique, le logiciel, la stratégie de match et les robots secondaires.
 
-J’ai notamment conçu les **PAMI**, robots secondaires autonomes qui marquent des points en fin de match : firmware, PCB et outils de supervision, publiés en open source. Le détail est dans la [page dédiée au PAMI](/projets/pami-cdfr-2026/).
+J’ai conçu et réalisé seul les **PAMI**, robots secondaires autonomes qui marquent des points en fin de match : firmware, PCB et outils de supervision, publiés en open source. Le détail est dans la [page dédiée au PAMI](/projets/pami-cdfr-2026/).
 
 ## Résultat
 

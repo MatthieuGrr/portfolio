@@ -21,7 +21,7 @@ featured: false                  # true = grande carte en haut de la page d'accu
 # order: 5                       # optionnel : force la position (1 = premier)
 # draft: true                    # optionnel : masque le projet du site
 
-context:                         # tout est optionnel
+context:                         # tout est optionnel ; mets entre guillemets un texte contenant « : »
   lieu: Paris
   equipe: Projet personnel
   role: Conception électronique et firmware

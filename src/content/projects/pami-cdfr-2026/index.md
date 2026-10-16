@@ -11,6 +11,7 @@ order: 2
 context:
   lieu: La Roche-sur-Yon
   equipe: FIPATECH
+  role: 'Projet mené seul : CAO, PCB, firmware, outils Python'
 stats:
   - { value: '17e / 89', label: 'classement de l’équipe' }
   - { value: '10 Hz', label: 'télémétrie WebSocket' }
@@ -33,6 +34,8 @@ gallery:
 La Coupe de France de Robotique est la plus grande compétition de robotique amateur d’Europe. Le thème 2026, *Winter is Coming*, transformait les robots en écureuils chargés de récupérer des noisettes et de les cacher. Les **PAMI** (Petits Actionneurs Mobiles Indépendants) sont des robots secondaires qui s’élancent en fin de match pour marquer des points supplémentaires.
 
 L’objectif : un robot compact, entièrement autonome, supervisable à distance, et publié en open source pour que d’autres équipes puissent le réutiliser.
+
+J’ai mené ce projet **seul, de bout en bout** : mécanique, PCB, firmware, outils de supervision et documentation.
 
 ## Matériel
 
