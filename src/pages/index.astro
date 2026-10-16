@@ -140,7 +140,7 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
       <div class="about-intro">
         <header class="section-head">
           <p class="eyebrow"><b>03</b> / Parcours</p>
-          <h2>Un passionné qui veut en faire son métier</h2>
+          <h2>Faire de ma passion mon métier</h2>
         </header>
         <div class="about-body">
           <Image src={portrait} alt="Portrait de Matthieu Geörger" widths={[240, 480]} sizes="240px" class="portrait" />
@@ -178,6 +178,9 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
           <p class="mono when">{experience.period}</p>
           <p class="job-title">{experience.title} <span>· {experience.org}</span></p>
           <p class="job-text">{experience.text}</p>
+          <ul class="tags licences" aria-label="Licences">
+            {experience.licences.map((l) => <li>{l}</li>)}
+          </ul>
         </div>
       </div>
     </div>
@@ -524,14 +527,14 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
     border-left: 1px solid var(--line-strong);
   }
 
-  .timeline li {
+  .timeline ol li {
     position: relative;
     display: grid;
     gap: 2px;
     padding: 0 0 18px 20px;
   }
 
-  .timeline li::before {
+  .timeline ol li::before {
     content: '';
     position: absolute;
     left: -4px;
@@ -574,6 +577,10 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
   .job-title span {
     font-weight: 400;
     color: var(--ink-3);
+  }
+
+  .licences {
+    margin-top: 6px;
   }
 
   .job-text {
