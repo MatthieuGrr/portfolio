@@ -6,7 +6,7 @@ category: Robotique
 tags: [Robotique autonome, Navigation, Stratégie de match, Travail d’équipe]
 cover: ./cover.jpg
 coverAlt: L’équipe FIPATECH posant avec son robot
-order: 4
+order: 5
 context:
   lieu: La Roche-sur-Yon
   equipe: FIPATECH

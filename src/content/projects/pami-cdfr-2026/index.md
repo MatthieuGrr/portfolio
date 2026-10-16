@@ -7,7 +7,7 @@ tags: [ESP32-S3, ESP-IDF, FreeRTOS, KiCad 9, Python, Onshape]
 cover: ./cover.jpg
 coverAlt: Le PAMI assemblé, châssis imprimé en 3D noir
 featured: true
-order: 2
+order: 3
 context:
   lieu: La Roche-sur-Yon
   equipe: FIPATECH

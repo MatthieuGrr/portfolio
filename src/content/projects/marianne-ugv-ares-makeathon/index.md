@@ -7,7 +7,7 @@ tags: [Onshape, Usinage, ROS 2, Bus CAN, ESP32, KiCad, ExpressLRS]
 cover: ./cover.jpg
 coverAlt: Le robot Marianne sur le terrain, badge « Competition Winner » sur le flanc
 featured: true
-order: 1
+order: 2
 context:
   lieu: Cracovie, Pologne
   equipe: French Touch
