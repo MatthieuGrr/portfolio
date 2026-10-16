@@ -17,6 +17,9 @@ stats:
   - { value: '0,1 %', label: 'd’erreur d’odométrie après calibration' }
   - { value: '50 Hz', label: 'boucle ros2_control' }
   - { value: '150+', label: 'tests automatisés' }
+links:
+  - { label: 'Pile ROS 2', url: 'https://github.com/MatthieuGrr/alidade_ros2', kind: code }
+  - { label: 'Firmware Pico 2', url: 'https://github.com/MatthieuGrr/diffdrive_pico_firmware', kind: code }
 gallery:
   - { src: ./trois-quarts.jpg, alt: 'Alidade vu de trois quarts avant sur un parquet', caption: 'Révision v2 : châssis 250 × 252 mm, roues Ø 100 mm' }
   - { src: ./face.jpg, alt: 'Alidade vu de face, caméra RealSense sur son support' }
@@ -102,7 +105,7 @@ Pendant un mois, le LiDAR refusait de démarrer une fois sur deux. Support méca
 
 En dialoguant avec le capteur en protocole brut, j’ai montré qu’il fonctionnait parfaitement. La cause était **logicielle** : le pilote publié embarque un SDK ancien qui compare le numéro de firmware du capteur à un seuil prévu pour une autre gamme. Le C1, gamme récente repartie à 1.02, passait sous le seuil. Avec un pilote compilé depuis les sources : 5 démarrages sur 5, en une demi-seconde.
 
-Le dépôt documente une trentaine de pièges de ce type, chacun avec sa mesure et sa cause.
+Le [dépôt](https://github.com/MatthieuGrr/alidade_ros2) documente une trentaine de pièges de ce type, chacun avec sa mesure et sa cause.
 
 ## Et ensuite
 
