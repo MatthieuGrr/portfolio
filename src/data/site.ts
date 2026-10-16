@@ -74,8 +74,6 @@ export const skills = [
   },
 ];
 
-export const tooling = ['Python', 'Kotlin / Jetpack Compose', 'Git / GitHub Actions', 'Docker', 'Développement assisté par IA', 'Home Assistant'];
-
 export const experience = {
   title: 'Technicien avionique',
   org: 'Aéronautique militaire',

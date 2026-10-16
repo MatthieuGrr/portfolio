@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Icon from '../components/Icon.astro';
-import { site, keyFigures, skills, tooling, experience } from '../data/site';
+import { site, keyFigures, skills, experience } from '../data/site';
 import { getProjects, formatDate, projectUrl } from '../lib/projects';
 import hero from '../assets/hero.jpg';
 import portrait from '../assets/profil.jpg';
@@ -127,10 +127,6 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
         }
       </div>
 
-      <p class="tooling">
-        <span class="mono">Au quotidien</span>
-        {tooling.join(' · ')}
-      </p>
     </div>
   </section>
 
@@ -447,22 +443,6 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
 
   .proof a:hover {
     color: var(--accent);
-  }
-
-  .tooling {
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-    color: var(--ink-2);
-    font-size: 0.95rem;
-  }
-
-  .tooling .mono {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    padding-top: 3px;
   }
 
   /* Parcours */
