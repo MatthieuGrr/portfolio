@@ -7,12 +7,12 @@ export const site = {
   url: 'https://portfolio.georger.ovh',
   description:
     'Roboticien autodidacte : PCB, firmware embarqué et mécanique. 1re place à l’ARES Makeathon 2025 (Agence européenne de défense), 17e sur 89 à la Coupe de France de Robotique 2026.',
-  status: 'Ouvert aux opportunités en robotique',
+  status: 'Disponible à partir de 2028',
   email: 'matthieu.georger@gmail.com',
   github: 'https://github.com/MatthieuGrr',
   linkedin: 'https://www.linkedin.com/in/matthieu-ge%C3%B6rger-4433a1242/',
   // Chemin du CV une fois déposé dans public/ (ex. '/cv-matthieu-georger.pdf').
-  // Tant que la valeur est null, le bouton « CV » n'est pas affiché.
+  // Tant que la valeur est null, le bouton « CV sur demande » ouvre un e-mail prérempli.
   cv: null as string | null,
   // Statistiques Umami (auto-hébergé)
   analytics: {
@@ -24,7 +24,7 @@ export const site = {
 export const keyFigures = [
   { value: '1re place', label: 'ARES Makeathon 2025', detail: 'Agence européenne de défense' },
   { value: '17e / 89', label: 'Coupe de France de Robotique 2026', detail: '77e l’année précédente' },
-  { value: 'Open source', label: 'PAMI ESP32-S3', detail: 'Firmware, PCB et outils publiés' },
+  { value: 'Déc. 2026', label: 'Alidade au hackathon défense', detail: 'Plateforme d’essai d’une équipe, AID × Artefact' },
 ];
 
 export const skills = [
@@ -74,11 +74,9 @@ export const skills = [
   },
 ];
 
-export const tooling = ['Python', 'Kotlin / Jetpack Compose', 'Git / GitHub Actions', 'Docker', 'Développement assisté par IA', 'Home Assistant'];
-
 export const experience = {
   title: 'Technicien avionique',
-  org: 'Aéronautique militaire',
-  period: 'Actuellement',
-  text: 'Maintenance et diagnostic de systèmes avioniques, titulaire des licences Rafale et NH90. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
+  org: 'Maintenance aéronautique',
+  period: 'Depuis 2017',
+  text: 'Maintenance et diagnostic de systèmes avioniques. Un métier qui m’a appris la rigueur des procédures, la recherche de panne méthodique et l’exigence de fiabilité propre aux systèmes critiques.',
 };

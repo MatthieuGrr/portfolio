@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Icon from '../components/Icon.astro';
-import { site, keyFigures, skills, tooling, experience } from '../data/site';
+import { site, keyFigures, skills, experience } from '../data/site';
 import { getProjects, formatDate, projectUrl } from '../lib/projects';
 import hero from '../assets/hero.jpg';
 import portrait from '../assets/profil.jpg';
@@ -12,6 +12,8 @@ const projects = await getProjects();
 const featured = projects.filter((p) => p.data.featured);
 const others = projects.filter((p) => !p.data.featured);
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+// Sans CV publié, le bouton ouvre un e-mail de demande prérempli
+const cvRequest = `mailto:${site.email}?subject=${encodeURIComponent('Demande de CV')}&body=${encodeURIComponent('Bonjour Matthieu,\n\nJ’ai consulté votre portfolio et souhaiterais recevoir votre CV.\n\n')}`;
 const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
@@ -30,9 +32,13 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
           <a class="btn btn-primary" href="#projets">Voir les projets <Icon name="arrow-right" /></a>
           <a class="btn" href="#contact">Me contacter</a>
           {
-            site.cv && (
+            site.cv ? (
               <a class="btn" href={site.cv} download>
                 <Icon name="download" /> CV
+              </a>
+            ) : (
+              <a class="btn" href={cvRequest}>
+                <Icon name="article" /> CV sur demande
               </a>
             )
           }
@@ -127,10 +133,6 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
         }
       </div>
 
-      <p class="tooling">
-        <span class="mono">Au quotidien</span>
-        {tooling.join(' · ')}
-      </p>
     </div>
   </section>
 
@@ -151,7 +153,7 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
               Git.
             </p>
             <p>
-              Mon métier de technicien avionique m’a donné une rigueur que j’applique à chaque projet : procédures,
+              Technicien avionique depuis 2017, j’applique à chaque projet la rigueur de ce métier : procédures,
               diagnostic méthodique, fiabilité avant tout.
             </p>
             <p>
@@ -189,7 +191,7 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
       <div>
         <p class="eyebrow"><b>04</b> / Contact</p>
         <h2>Un projet, un poste, une question ?</h2>
-        <p class="lead">Je suis ouvert aux opportunités en robotique et en systèmes embarqués. Écrivez-moi, je réponds rapidement.</p>
+        <p class="lead">Je serai disponible à partir de 2028 pour un poste en robotique ou en systèmes embarqués. Échangeons dès maintenant : je réponds rapidement.</p>
       </div>
       <div class="contact-links">
         <a class="btn btn-primary big" href={`mailto:${site.email}`}><Icon name="mail" size={18} /> {site.email}</a>
@@ -197,9 +199,13 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
           <a class="btn" href={site.linkedin} rel="noopener"><Icon name="linkedin" /> LinkedIn</a>
           <a class="btn" href={site.github} rel="noopener"><Icon name="github" /> GitHub</a>
           {
-            site.cv && (
+            site.cv ? (
               <a class="btn" href={site.cv} download>
                 <Icon name="download" /> Télécharger mon CV
+              </a>
+            ) : (
+              <a class="btn" href={cvRequest}>
+                <Icon name="article" /> CV sur demande
               </a>
             )
           }
@@ -447,22 +453,6 @@ const milestones = [...projects].sort((a, b) => b.data.date.getTime() - a.data.d
 
   .proof a:hover {
     color: var(--accent);
-  }
-
-  .tooling {
-    margin-top: 24px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 14px;
-    color: var(--ink-2);
-    font-size: 0.95rem;
-  }
-
-  .tooling .mono {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    padding-top: 3px;
   }
 
   /* Parcours */
