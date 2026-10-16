@@ -44,8 +44,7 @@ export const skills = [
     items: [
       'C / C++',
       'ESP-IDF et FreeRTOS',
-      'ESP32, RP2350 (PIO), STM32, Teensy',
-      'MicroPython',
+      'ESP32, RP2350 (PIO), STM32',
       'REST, WebSocket, MQTT, OTA',
     ],
     proof: ['alidade-robot-ros2', 'pami-cdfr-2026', 'distributeur-croquettes-zigbee'],
@@ -56,7 +55,7 @@ export const skills = [
       'ROS 2 : ros2_control, Nav2, slam_toolbox',
       'Odométrie et fusion IMU',
       'SLAM, navigation, exploration autonome',
-      'Vision : ArUco, OpenCV, YOLO',
+      'Vision : ArUco, OpenCV',
       'Simulation : Gazebo, RViz',
     ],
     proof: ['alidade-robot-ros2', 'marianne-ugv-ares-makeathon', 'pami-cdfr-2026'],
