@@ -101,6 +101,6 @@ Le dépôt documente une trentaine de pièges de ce type, chacun avec sa mesure 
 
 ## Et ensuite
 
-Alidade va servir de plateforme d’essai pour des **algorithmes de planification par IA** lors du *Humanoid Defense Robot Hackathon*, organisé par l’Agence de l’innovation de défense et Artefact au Grand Palais, du 2 au 4 décembre 2026.
+Alidade a dépassé son objectif de départ : je le prépare et le mets à disposition d’une équipe du *Humanoid Defense Robot Hackathon* (Agence de l’innovation de défense et Artefact, Grand Palais, décembre 2026), qui s’en servira de plateforme d’essai pour des **algorithmes de planification par IA**.
 
 La révision v2 du châssis est en cours de calibration. Prochaines étapes : un drapeau de validité IMU et une compensation de zone morte dans le firmware, une empreinte polygonale pour Nav2, et des zones interdites pour les vitres que le LiDAR voit mal.
