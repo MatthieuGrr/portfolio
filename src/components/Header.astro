@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import Logo from './Logo.astro';
 import { site } from '../data/site';
 
 const links = [
@@ -13,7 +14,8 @@ const links = [
 <header class="site-header">
   <div class="container bar">
     <a href="/" class="brand" aria-label={`${site.name}, accueil`}>
-      <span class="mark" aria-hidden="true">MG</span>
+      <Logo height={17} class="logo" />
+      <span class="sep" aria-hidden="true"></span>
       <span class="brand-name">{site.name}</span>
     </a>
 
@@ -102,16 +104,20 @@ const links = [
     margin-right: auto;
   }
 
-  .mark {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    background: var(--ink);
-    color: var(--bg);
-    font: 600 0.75rem/1 var(--font-mono);
-    letter-spacing: 0;
+  .brand :global(.logo) {
+    flex: none;
+    color: var(--ink);
+    transition: color 0.15s;
+  }
+
+  .brand:hover :global(.logo) {
+    color: var(--accent);
+  }
+
+  .sep {
+    width: 1px;
+    height: 18px;
+    background: var(--line-strong);
   }
 
   .nav {
