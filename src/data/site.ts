@@ -7,7 +7,7 @@ export const site = {
   url: 'https://portfolio.georger.ovh',
   description:
     'Roboticien autodidacte : PCB, firmware embarqué et mécanique. 1re place à l’ARES Makeathon 2025 (Agence européenne de défense), 17e sur 89 à la Coupe de France de Robotique 2026.',
-  status: 'Disponible à partir de 2028',
+  status: 'Open to work · prise de poste en 2028',
   email: 'matthieu.georger@gmail.com',
   github: 'https://github.com/MatthieuGrr',
   linkedin: 'https://www.linkedin.com/in/matthieu-ge%C3%B6rger-4433a1242/',
