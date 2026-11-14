@@ -16,7 +16,7 @@ export const site = {
   cv: null as string | null,
   // Statistiques GoatCounter (sans cookies)
   analytics: {
-    src: 'https://gc.zgo.at/count.js',
+    src: '/count.js',
     endpoint: 'https://georger.goatcounter.com/count',
   },
 };
