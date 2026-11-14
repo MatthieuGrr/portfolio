@@ -50,7 +50,8 @@ const ogUrl = new URL(og.src, Astro.site);
         if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
       } catch (e) {}
     </script>
-    <script is:inline defer src={site.analytics.src} data-website-id={site.analytics.websiteId}></script>
+    <script is:inline>window.goatcounter = { path: function (p) { return location.host + p; } };</script>
+    <script is:inline async src={site.analytics.src} data-goatcounter={site.analytics.endpoint}></script>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>

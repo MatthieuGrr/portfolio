@@ -14,10 +14,10 @@ export const site = {
   // Chemin du CV une fois déposé dans public/ (ex. '/cv-matthieu-georger.pdf').
   // Tant que la valeur est null, le bouton « CV sur demande » ouvre un e-mail prérempli.
   cv: null as string | null,
-  // Statistiques Umami (auto-hébergé)
+  // Statistiques GoatCounter (sans cookies)
   analytics: {
-    src: 'https://stats.georger.ovh/script.js',
-    websiteId: '24a9eae3-d07f-470d-a832-768021c89b85',
+    src: 'https://gc.zgo.at/count.js',
+    endpoint: 'https://georger.goatcounter.com/count',
   },
 };
 
